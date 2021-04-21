@@ -624,7 +624,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   </entry>
   <entry>
     <title>minecraft 服务端搭建, 支持模组(mod) + 插件(plugin)</title>
-    <url>/2020/02/22/minecraft-server-build-mod-plugin/</url>
+    <url>/2020/02/23/minecraft-server-build-mod-plugin/</url>
     <content><![CDATA[<p>备注: 此搭建方法不限制与 <code>linux</code> 或 <code>windows</code>, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。</p>
 <h5 id="步骤-1-你需要准备什么？"><a href="#步骤-1-你需要准备什么？" class="headerlink" title="步骤 1: 你需要准备什么？"></a>步骤 1: 你需要准备什么？</h5><ul>
 <li>一台服务器(window, linux 均可)</li>
@@ -636,15 +636,15 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <p><a href="https://files.minecraftforge.net/">https://files.minecraftforge.net</a>。</p>
 <p><img src="https://yyccyy.com/wp-content/uploads/2020/02/minecraft-server-build-1.png"></p>
 <p><code>图中点进去获取真实的下载链接后, 使用 wget 进行下载</code></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">wget</span> https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行下载, 之后可通过 ftp 上传至服务器。</p>
-<h5 id="步骤-3-安装服务端"><a href="#步骤-3-安装服务端" class="headerlink" title="步骤 3: 安装服务端"></a>步骤 3: 安装服务端</h5><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="步骤-3-安装服务端"><a href="#步骤-3-安装服务端" class="headerlink" title="步骤 3: 安装服务端"></a>步骤 3: 安装服务端</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装过程中需要下载各种资源包, 如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行安装下载, 之后可通过 ftp 上传至服务器。</p>
 <p><code>最终安装完成后, 得到的目录结构</code></p>
 <p><img src="https://yyccyy.com/wp-content/uploads/2020/02/minecraft-server-build-2.png"></p>
-<h5 id="步骤-4-一切就绪-启动服务端"><a href="#步骤-4-一切就绪-启动服务端" class="headerlink" title="步骤 4: 一切就绪, 启动服务端"></a>步骤 4: 一切就绪, 启动服务端</h5><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="步骤-4-一切就绪-启动服务端"><a href="#步骤-4-一切就绪-启动服务端" class="headerlink" title="步骤 4: 一切就绪, 启动服务端"></a>步骤 4: 一切就绪, 启动服务端</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>第一次启动必然会失败</code>, 原因是我们没有同意相关的协议。</p>
 <p>我们需要同意相关的协议才能启动服务端, 编辑根目录的 <code>eula.txt</code> 文件, 启动服务端后自动生成的文件。</p>
@@ -938,7 +938,7 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
 <h5 id="使用-husky-和-lint-staged"><a href="#使用-husky-和-lint-staged" class="headerlink" title="使用 husky 和 lint-staged"></a>使用 husky 和 lint-staged</h5><ol>
 <li>安装依赖库</li>
 </ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="2">
 <li>在 package.json 中配置 husky</li>
