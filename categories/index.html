@@ -17,6 +17,8 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
@@ -30,7 +32,7 @@
 <meta property="og:description" content="切图仔">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-21T14:24:20.000Z">
-<meta property="article:modified_time" content="2021-04-21T15:55:13.124Z">
+<meta property="article:modified_time" content="2021-04-21T16:38:12.604Z">
 <meta property="article:author" content="MiDouShiTongTong">
 <meta property="article:tag" content="迷都是通通 &#39;s Blog">
 <meta name="twitter:card" content="summary">
@@ -47,7 +49,7 @@
     isPost : false,
     lang   : 'zh-CN'
   };
-</script>
+</script><link rel="stylesheet" href="/css/global.css">
 <title>文章分类 | 迷都是通通 's Blog
 </title>
   
@@ -363,6 +365,26 @@ document.addEventListener('pjax:success', () => {
 
 
 
+  <script>
+    NProgress.configure({
+      showSpinner: false
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
 
   
 
