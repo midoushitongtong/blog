@@ -5,10 +5,10 @@
 # Site
 title: 迷都是通通 's Blog
 subtitle: ''
-description: ''
+description: '切图仔'
 keywords: 迷都是通通 's Blog
-author: midoushitongtong
-language: zh
+author: MiDouShiTongTong
+language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
@@ -44,14 +44,14 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
   tab_replace: ''
@@ -97,9 +97,25 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
+scheme: Gemini
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 0
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
