@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/apple-icon-precomposed.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"midoushitongtong.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="最终达到的一个效果snack 地址: https:&#x2F;&#x2F;snack.expo.io&#x2F;@midoushitongtong&#x2F;react-navigation-gesture-transition 可以通过 expo，在你的设备上直接运行它。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react navigation 手势操作 + 自定义转场动画">
+<meta property="og:url" content="https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/index.html">
+<meta property="og:site_name" content="迷都是通通 &#39;s Blog">
+<meta property="og:description" content="最终达到的一个效果snack 地址: https:&#x2F;&#x2F;snack.expo.io&#x2F;@midoushitongtong&#x2F;react-navigation-gesture-transition 可以通过 expo，在你的设备上直接运行它。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://midoushitongtong.github.io/images/post/4.gif">
+<meta property="article:published_time" content="2019-12-11T11:06:05.000Z">
+<meta property="article:modified_time" content="2021-04-21T15:55:13.124Z">
+<meta property="article:author" content="MiDouShiTongTong">
+<meta property="article:tag" content="迷都是通通 &#39;s Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://midoushitongtong.github.io/images/post/4.gif">
+
+
+<link rel="canonical" href="https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>react navigation 手势操作 + 自定义转场动画 | 迷都是通通 's Blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="迷都是通通 's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">迷都是通通 's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E8%BE%BE%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E6%95%88%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">最终达到的一个效果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">实现步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E8%BD%AC%E5%9C%BA%E5%8A%A8%E7%94%BB%E7%9A%84%E8%BF%87%E6%B8%A1%E6%97%B6%E9%97%B4"><span class="nav-number">2.1.</span> <span class="nav-text">1. 配置转场动画的过渡时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E8%BD%AC%E5%9C%BA%E5%8A%A8%E7%94%BB%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2. 配置转场动画的动画效果</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E6%89%8B%E5%8A%BF%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">3. 配置手势操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-%E6%95%B4%E5%90%88"><span class="nav-number">2.4.</span> <span class="nav-text">4. 整合</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MiDouShiTongTong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">MiDouShiTongTong</p>
+  <div class="site-description" itemprop="description">切图仔</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="MiDouShiTongTong">
+      <meta itemprop="description" content="切图仔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="迷都是通通 's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          react navigation 手势操作 + 自定义转场动画
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-11 19:06:05" itemprop="dateCreated datePublished" datetime="2019-12-11T19:06:05+08:00">2019-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">开发杂记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h5 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h5><p>snack 地址: <a target="_blank" rel="noopener" href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
+<p>可以通过 <a target="_blank" rel="noopener" href="https://expo.io/">expo</a>，在你的设备上直接运行它。</p>
+<p><img src="/images/post/4.gif"></p>
+<span id="more"></span>
+
+<h5 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h5><h6 id="1-配置转场动画的过渡时间"><a href="#1-配置转场动画的过渡时间" class="headerlink" title="1. 配置转场动画的过渡时间"></a>1. 配置转场动画的过渡时间</h6><p>通过配置 <code>transitionSpec</code> 属性，来配置每个页面转场动画的过渡时间，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  transitionSpec<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 进入页面的配置</span>
+    open<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      animation<span class="token operator">:</span> <span class="token string">'timing'</span><span class="token punctuation">,</span>
+      config<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        duration<span class="token operator">:</span> <span class="token number">450</span><span class="token punctuation">,</span>
+        easing<span class="token operator">:</span> Easing<span class="token punctuation">.</span><span class="token function">bezier</span><span class="token punctuation">(</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.39</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">// 关闭页面的配置</span>
+    close<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      animation<span class="token operator">:</span> <span class="token string">'timing'</span><span class="token punctuation">,</span>
+      config<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        duration<span class="token operator">:</span> <span class="token number">450</span><span class="token punctuation">,</span>
+        easing<span class="token operator">:</span> Easing<span class="token punctuation">.</span><span class="token function">bezier</span><span class="token punctuation">(</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.39</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="2-配置转场动画的动画效果"><a href="#2-配置转场动画的动画效果" class="headerlink" title="2. 配置转场动画的动画效果"></a>2. 配置转场动画的动画效果</h6><p>通过配置 <code>transform</code> 属性，来配置每个页面转场动画的动画效果，动画效果有很多种，例如【<code>淡入淡出</code>、<code>X/Y轴水平平移</code>、<code>Z轴水平旋转</code>、<code>放大/缩小</code>，等】，这里主要以<code>X轴水平平移</code>作为参考，其他配置类似，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  transform<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token comment">// next：true 为关闭的页面, false 为打开的页面</span>
+      translateX<span class="token operator">:</span> next
+        <span class="token operator">?</span> Animated<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span>next<span class="token punctuation">.</span>progress<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+            inputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token comment">// 关闭的页面从 (0 的位置) 水平平移到 (-屏幕宽度 * 三分之一的位置)</span>
+            outputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span>layouts<span class="token punctuation">.</span>screen<span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token number">0.3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token operator">:</span> Animated<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span>current<span class="token punctuation">.</span>progress<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+            inputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token comment">// 打开的页面从 (屏幕宽度位置) 水平平移到 (0的位置)</span>
+            outputRange<span class="token operator">:</span> <span class="token punctuation">[</span>layouts<span class="token punctuation">.</span>screen<span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">// ... 需要配置更多的动画效果，可以根据上面的配置依次往下面添加</span>
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="3-配置手势操作"><a href="#3-配置手势操作" class="headerlink" title="3. 配置手势操作"></a>3. 配置手势操作</h6><p>在 react navigation 中，配置手势操作非常简单，只需配置两个属性<code>gestureEnabled</code>以及<code>gestureDirection</code>，前者用于开启或关闭手势操作，后者用于控制手势操作为左右滑动还是上下滑动，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  gestureEnabled<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  gestureDirection<span class="token operator">:</span> <span class="token string">'horizontal'</span><span class="token punctuation">,</span>
+  <span class="token comment">// gestureDirection: 'vertical'</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="4-整合"><a href="#4-整合" class="headerlink" title="4. 整合"></a>4. 整合</h6><p>将上面的配置整合在一起，也就是上面 gif 中第一个转场动画的配置<br>看起来像这个样子</p>
+<pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen
+  name<span class="token operator">=</span><span class="token string">"A"</span>
+  component<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token constant">A</span><span class="token punctuation">&#125;</span>
+  options<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>
+    gestureEnabled<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    gestureDirection<span class="token operator">:</span> <span class="token string">'horizontal'</span><span class="token punctuation">,</span>
+    transitionSpec<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      open<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        animation<span class="token operator">:</span> <span class="token string">'timing'</span><span class="token punctuation">,</span>
+        config<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          duration<span class="token operator">:</span> <span class="token number">450</span><span class="token punctuation">,</span>
+          easing<span class="token operator">:</span> Easing<span class="token punctuation">.</span><span class="token function">bezier</span><span class="token punctuation">(</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.39</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      close<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        animation<span class="token operator">:</span> <span class="token string">'timing'</span><span class="token punctuation">,</span>
+        config<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          duration<span class="token operator">:</span> <span class="token number">450</span><span class="token punctuation">,</span>
+          easing<span class="token operator">:</span> Easing<span class="token punctuation">.</span><span class="token function">bezier</span><span class="token punctuation">(</span><span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.39</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">cardStyleInterpolator</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> current<span class="token punctuation">,</span> next<span class="token punctuation">,</span> layouts <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+        cardStyle<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          transform<span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">&#123;</span>
+              translateX<span class="token operator">:</span> next
+                <span class="token operator">?</span> Animated<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span>next<span class="token punctuation">.</span>progress<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+                    inputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    outputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span>layouts<span class="token punctuation">.</span>screen<span class="token punctuation">.</span>width <span class="token operator">*</span> <span class="token number">0.3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+                <span class="token operator">:</span> Animated<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span>current<span class="token punctuation">.</span>progress<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+                    inputRange<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    outputRange<span class="token operator">:</span> <span class="token punctuation">[</span>layouts<span class="token punctuation">.</span>screen<span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+<span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p><a target="_blank" rel="noopener" href="https://callstack.com/blog/custom-screen-transitions-in-react-navigation">https://callstack.com/blog/custom-screen-transitions-in-react-navigation</a></p>
+<p><a target="_blank" rel="noopener" href="https://reactnavigation.org/">https://reactnavigation.org</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/13/electron-react-typescript-build/" rel="prev" title="electron + react + typescript 环境搭建">
+                  <i class="fa fa-chevron-left"></i> electron + react + typescript 环境搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/21/reject-shit-use-husky-lint-staged/" rel="next" title="使用 husky + lint-staged 防止💩的流入">
+                  使用 husky + lint-staged 防止💩的流入 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiDouShiTongTong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>

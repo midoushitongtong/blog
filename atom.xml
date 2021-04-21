@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>迷都是通通 &#39;s Blog</title>
+  <icon>https://midoushitongtong.github.io/icon.png</icon>
+  
+  <link href="https://midoushitongtong.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://midoushitongtong.github.io/"/>
+  <updated>2021-04-21T15:55:13.120Z</updated>
+  <id>https://midoushitongtong.github.io/</id>
+  
+  <author>
+    <name>MiDouShiTongTong</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>minecraft 服务端搭建, 支持模组(mod) + 插件(plugin)</title>
+    <link href="https://midoushitongtong.github.io/2020/02/22/minecraft-server-build-mod-plugin/"/>
+    <id>https://midoushitongtong.github.io/2020/02/22/minecraft-server-build-mod-plugin/</id>
+    <published>2020-02-22T18:23:23.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;备注: 此搭建方法不限制与 &lt;code&gt;linux&lt;/code&gt; 或 &lt;code&gt;windows&lt;/code&gt;, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。&lt;/p&gt;
+&lt;h5 id=&quot;步骤-1-你需要准备什么？&quot;&gt;&lt;a href=&quot;#步骤-1-你需要准备什么？&quot; class=&quot;headerlink&quot; title=&quot;步骤 1: 你需要准备什么？&quot;&gt;&lt;/a&gt;步骤 1: 你需要准备什么？&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;一台服务器(window, linux 均可)&lt;/li&gt;
+&lt;li&gt;java &lt;code&gt;8&lt;/code&gt; 环境(别问为什么是 8, 问就是兼容性)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;步骤-2-下载服务端&quot;&gt;&lt;a href=&quot;#步骤-2-下载服务端&quot; class=&quot;headerlink&quot; title=&quot;步骤 2: 下载服务端&quot;&gt;&lt;/a&gt;步骤 2: 下载服务端&lt;/h5&gt;&lt;p&gt;备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活札记" scheme="https://midoushitongtong.github.io/categories/%E7%94%9F%E6%B4%BB%E6%9C%AD%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>可能不需要 redux 了, 但不该用 hook 去取代它</title>
+    <link href="https://midoushitongtong.github.io/2019/12/29/cant-replace-redux-with-hooks/"/>
+    <id>https://midoushitongtong.github.io/2019/12/29/cant-replace-redux-with-hooks/</id>
+    <published>2019-12-29T04:05:05.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;最近再补有关 &lt;a href=&quot;https://zh-hans.reactjs.org/docs/hooks-reference.html&quot;&gt;react hook&lt;/a&gt; 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 &lt;code&gt;state&lt;/code&gt;，并且可以使用 &lt;code&gt;componentDidMount&lt;/code&gt;, &lt;code&gt;componentDidUpdate&lt;/code&gt;, &lt;code&gt;shouldComponentUpdate&lt;/code&gt; 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 &lt;code&gt;useReducer&lt;/code&gt; 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 &lt;code&gt;redux&lt;/code&gt; 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 &lt;code&gt;完全取代&lt;/code&gt; redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用 husky + lint-staged 防止💩的流入</title>
+    <link href="https://midoushitongtong.github.io/2019/12/21/reject-shit-use-husky-lint-staged/"/>
+    <id>https://midoushitongtong.github.io/2019/12/21/reject-shit-use-husky-lint-staged/</id>
+    <published>2019-12-21T13:05:05.000Z</published>
+    <updated>2021-04-21T15:55:13.124Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h5&gt;&lt;h6 id=&quot;husky&quot;&gt;&lt;a href=&quot;#husky&quot; class=&quot;headerlink&quot; title=&quot;husky&quot;&gt;&lt;/a&gt;husky&lt;/h6&gt;&lt;p&gt;husky 是一个用于给 &lt;code&gt;git&lt;/code&gt; 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加&lt;a href=&quot;https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks&quot;&gt;钩子&lt;/a&gt;，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。&lt;/p&gt;
+&lt;h6 id=&quot;lint-staged&quot;&gt;&lt;a href=&quot;#lint-staged&quot; class=&quot;headerlink&quot; title=&quot;lint-staged&quot;&gt;&lt;/a&gt;lint-staged&lt;/h6&gt;&lt;p&gt;先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;#x1f6ab;&amp;#x1f4a9; lint-staged&lt;br&gt;Run linters against staged git files and don’t let &amp;#x1f4a9; slip into your code base!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;大概意思是，在你将提交暂存区的文件到仓库之前，可以通过 lint-staged 对暂存区的文件进行检查，检查通过才能提交到仓库，以防止&amp;#x1f4a9;的流入。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>react navigation 手势操作 + 自定义转场动画</title>
+    <link href="https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/"/>
+    <id>https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/</id>
+    <published>2019-12-11T11:06:05.000Z</published>
+    <updated>2021-04-21T15:55:13.124Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;最终达到的一个效果&quot;&gt;&lt;a href=&quot;#最终达到的一个效果&quot; class=&quot;headerlink&quot; title=&quot;最终达到的一个效果&quot;&gt;&lt;/a&gt;最终达到的一个效果&lt;/h5&gt;&lt;p&gt;snack 地址: &lt;a href=&quot;https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition&quot;&gt;https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可以通过 &lt;a href=&quot;https://expo.io/&quot;&gt;expo&lt;/a&gt;，在你的设备上直接运行它。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/post/4.gif&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>electron + react + typescript 环境搭建</title>
+    <link href="https://midoushitongtong.github.io/2019/11/13/electron-react-typescript-build/"/>
+    <id>https://midoushitongtong.github.io/2019/11/13/electron-react-typescript-build/</id>
+    <published>2019-11-13T13:23:23.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;到目前为止 github 上比较流行的相关脚手架&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/electron-react-boilerplate/electron-react-boilerplate&quot;&gt;react-boilerplate&lt;/a&gt; start 数量较多，但不支持 typescript&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/iRath96/electron-react-typescript-boilerplate&quot;&gt;react-typescript-boilerplate&lt;/a&gt; 支持 typescript，但 1 年前就已停止维护&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;综上所述，打算自己搭建一个满意的开发环境，顺便提高一下自己的动手能力，大致的思路如下&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>手动搭建php环境(win系统)</title>
+    <link href="https://midoushitongtong.github.io/2019/08/11/manual-build-php-environment/"/>
+    <id>https://midoushitongtong.github.io/2019/08/11/manual-build-php-environment/</id>
+    <published>2019-08-11T08:35:35.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）&quot;&gt;&lt;a href=&quot;#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）&quot; class=&quot;headerlink&quot; title=&quot;记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）&quot;&gt;&lt;/a&gt;记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）&lt;/h5&gt;&lt;h6 id=&quot;1-下载-windows-版-apache-启动器&quot;&gt;&lt;a href=&quot;#1-下载-windows-版-apache-启动器&quot; class=&quot;headerlink&quot; title=&quot;1. 下载 windows 版 apache 启动器&quot;&gt;&lt;/a&gt;1. 下载 windows 版 apache 启动器&lt;/h6&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.apachehaus.com/cgi-bin/download.plx&quot;&gt;下载 windows 版 apache 启动器传送门&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;选择&lt;code&gt;64&lt;/code&gt;位或者&lt;code&gt;32&lt;/code&gt;位的启动器下载即可&lt;/li&gt;
+&lt;li&gt;&lt;img src=&quot;/images/post/2.png&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>http 性能测试工具 wrk</title>
+    <link href="https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/"/>
+    <id>https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/</id>
+    <published>2019-04-15T11:05:05.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;wrk-有什么用？&quot;&gt;&lt;a href=&quot;#wrk-有什么用？&quot; class=&quot;headerlink&quot; title=&quot;wrk 有什么用？&quot;&gt;&lt;/a&gt;wrk 有什么用？&lt;/h5&gt;&lt;p&gt;wrk 是一个的 http 压力测试工具。&lt;br&gt;我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>node 版本管理工具</title>
+    <link href="https://midoushitongtong.github.io/2019/01/31/react-ssr-with-nextjs/"/>
+    <id>https://midoushitongtong.github.io/2019/01/31/react-ssr-with-nextjs/</id>
+    <published>2019-01-31T12:05:05.000Z</published>
+    <updated>2021-04-21T15:55:13.124Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;最近在搭建一个开源项目的时候，需要 &lt;code&gt;Node v8&lt;/code&gt; 的环境才能运行，但本地的环境是 &lt;code&gt;Node v10&lt;/code&gt; , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/tj/n&quot; title=&quot;n&quot;&gt;n&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/creationix/nvm&quot;&gt;nvm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>react 服务端渲染之 next.js</title>
+    <link href="https://midoushitongtong.github.io/2019/01/15/node-version-manage/"/>
+    <id>https://midoushitongtong.github.io/2019/01/15/node-version-manage/</id>
+    <published>2019-01-15T05:25:25.000Z</published>
+    <updated>2021-04-21T15:55:13.124Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;为什么使用-Next-js-来做-React-服务端渲染&quot;&gt;&lt;a href=&quot;#为什么使用-Next-js-来做-React-服务端渲染&quot; class=&quot;headerlink&quot; title=&quot;为什么使用 Next.js 来做 React 服务端渲染 ?&quot;&gt;&lt;/a&gt;为什么使用 Next.js 来做 React 服务端渲染 ?&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;轻量级，简单易懂，仅需学习几个核心的 API 就可上手开发&lt;/li&gt;
+&lt;li&gt;易扩展, 与 &lt;a href=&quot;https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-express&quot; title=&quot;express&quot;&gt;express&lt;/a&gt;, &lt;a href=&quot;https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-koa&quot; title=&quot;koa&quot;&gt;koa&lt;/a&gt; 等 node 框架无缝接入&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/ssr-caching&quot; title=&quot;缓存 ssr 页面&quot;&gt;支持缓存&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;typescript 支持&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我的 2018</title>
+    <link href="https://midoushitongtong.github.io/2019/01/05/my-2018/"/>
+    <id>https://midoushitongtong.github.io/2019/01/05/my-2018/</id>
+    <published>2019-01-05T12:20:20.000Z</published>
+    <updated>2021-04-21T15:55:13.120Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;干了啥？&quot;&gt;&lt;a href=&quot;#干了啥？&quot; class=&quot;headerlink&quot; title=&quot;干了啥？&quot;&gt;&lt;/a&gt;干了啥？&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;一月&lt;/code&gt; 一月以及前面几个月都在和 java se 斗智斗勇。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;二月&lt;/code&gt; 还是与 java se 斗智斗勇，因为过年以及玩心太大，整个二月没有几天是静下心来学习的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;三月&lt;/code&gt; 开学了，试着把放假的心收回来，慢慢的回到了 java se 的知识海洋。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;四月&lt;/code&gt; 自认为 java se 学的差不多了, 开始进攻 jdbc。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;五月&lt;/code&gt; jdbc 学的差不多了, 跟着知乎上推荐的学习路线, 开始学习 java web。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;六月&lt;/code&gt; 沉浸在 java web 的知识海洋中。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="生活札记" scheme="https://midoushitongtong.github.io/categories/%E7%94%9F%E6%B4%BB%E6%9C%AD%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>typescript 热部署环境搭建</title>
+    <link href="https://midoushitongtong.github.io/2018/12/25/typescript-hot-reload-env/"/>
+    <id>https://midoushitongtong.github.io/2018/12/25/typescript-hot-reload-env/</id>
+    <published>2018-12-25T07:11:11.000Z</published>
+    <updated>2021-04-21T15:55:13.124Z</updated>
+    
+    
+    <summary type="html">&lt;h5 id=&quot;typescript-热部署环境搭建大致流程&quot;&gt;&lt;a href=&quot;#typescript-热部署环境搭建大致流程&quot; class=&quot;headerlink&quot; title=&quot;typescript 热部署环境搭建大致流程&quot;&gt;&lt;/a&gt;typescript 热部署环境搭建大致流程&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;初始化 &lt;code&gt;pacakge.json&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;line-numbers language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init -y&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;p&gt;安装依赖, 用到以下依赖&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;webpack&lt;/code&gt; &lt;code&gt;webpack-cli&lt;/code&gt; webpack 以及 webpack 命令行工具&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;typescript&lt;/code&gt; typescript 命令行工具&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webpack-dev-server&lt;/code&gt; webpack 热部署服务器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ts-loader&lt;/code&gt; 用于集成 webpack 和 typescript&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;html-webpack-plugin&lt;/code&gt; 用于打包 html&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clean-webpack-plugin&lt;/code&gt; 用于删除上一次打包的文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;line-numbers language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --save-dev webpack webpack-cli typescript ts-loader webpack-dev-server html-webpack-plugin clean-webpack-plugin&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</summary>
+    
+    
+    
+    <category term="开发杂记" scheme="https://midoushitongtong.github.io/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+</feed>

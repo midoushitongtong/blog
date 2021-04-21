@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/apple-icon-precomposed.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"midoushitongtong.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="wrk 有什么用？wrk 是一个的 http 压力测试工具。我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http 性能测试工具 wrk">
+<meta property="og:url" content="https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/index.html">
+<meta property="og:site_name" content="迷都是通通 &#39;s Blog">
+<meta property="og:description" content="wrk 有什么用？wrk 是一个的 http 压力测试工具。我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-04-15T11:05:05.000Z">
+<meta property="article:modified_time" content="2021-04-21T15:55:13.120Z">
+<meta property="article:author" content="MiDouShiTongTong">
+<meta property="article:tag" content="迷都是通通 &#39;s Blog">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>http 性能测试工具 wrk | 迷都是通通 's Blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="迷都是通通 's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">迷都是通通 's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#wrk-%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">wrk 有什么用？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-wrk"><span class="nav-number">2.</span> <span class="nav-text">安装 wrk</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8-wrk"><span class="nav-number">3.</span> <span class="nav-text">简单的使用 wrk</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MiDouShiTongTong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">MiDouShiTongTong</p>
+  <div class="site-description" itemprop="description">切图仔</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="MiDouShiTongTong">
+      <meta itemprop="description" content="切图仔">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="迷都是通通 's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          http 性能测试工具 wrk
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-15 19:05:05" itemprop="dateCreated datePublished" datetime="2019-04-15T19:05:05+08:00">2019-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">开发杂记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h5 id="wrk-有什么用？"><a href="#wrk-有什么用？" class="headerlink" title="wrk 有什么用？"></a>wrk 有什么用？</h5><p>wrk 是一个的 http 压力测试工具。<br>我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。</p>
+<span id="more"></span>
+
+<h5 id="安装-wrk"><a href="#安装-wrk" class="headerlink" title="安装 wrk"></a>安装 wrk</h5><p>Ubuntu</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev <span class="token function">git</span> -y
+<span class="token function">git</span> clone https://github.com/wg/wrk.git wrk
+<span class="token builtin class-name">cd</span> wrk
+<span class="token function">make</span>
+<span class="token comment"># 添加可执行命令</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> wrk /usr/local/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Centos</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> yum groupinstall <span class="token string">'Development Tools'</span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y openssl-devel <span class="token function">git</span>
+<span class="token function">git</span> clone https://github.com/wg/wrk.git wrk
+<span class="token builtin class-name">cd</span> wrk
+<span class="token function">make</span>
+<span class="token comment"># 添加可执行命令</span>
+<span class="token function">sudo</span> <span class="token function">cp</span> wrk /usr/local/bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>OS X</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wg/wrk/wiki/Installing-wrk-on-Linux">文档</a></p>
+<p>Windows 10</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wg/wrk/wiki/Installing-wrk-on-Windows-10">文档</a></p>
+<h5 id="简单的使用-wrk"><a href="#简单的使用-wrk" class="headerlink" title="简单的使用 wrk"></a>简单的使用 wrk</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wrk -t10 -c100 -d5s --latency  <span class="token string">"http://www.baidu.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>以上命令 wrk 会开启 <code>10</code> 个线程来处理 <code>100</code> 个客户端对<code>http://www.baidu.com</code> 进行 <code>5</code> 秒的压力测试</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Running 5s <span class="token builtin class-name">test</span> @ http://www.baidu.com
+  <span class="token number">10</span> threads and <span class="token number">100</span> connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   <span class="token number">182</span>.38ms  <span class="token number">259</span>.62ms   <span class="token number">1</span>.71s    <span class="token number">89.69</span>%
+    Req/Sec   <span class="token number">100.21</span>    <span class="token number">122.58</span>   <span class="token number">839.00</span>     <span class="token number">96.38</span>%
+  Latency Distribution
+     <span class="token number">50</span>%   <span class="token number">11</span>.54ms
+     <span class="token number">75</span>%  <span class="token number">268</span>.11ms
+     <span class="token number">90</span>%  <span class="token number">468</span>.33ms
+     <span class="token number">99</span>%    <span class="token number">1</span>.26s
+  <span class="token number">4552</span> requests <span class="token keyword">in</span> <span class="token number">5</span>.01s, <span class="token number">66</span>.82MB <span class="token builtin class-name">read</span>
+  Socket errors: connect <span class="token number">0</span>, <span class="token builtin class-name">read</span> <span class="token number">0</span>, <span class="token function">write</span> <span class="token number">0</span>, <span class="token function">timeout</span> <span class="token number">2</span>
+Requests/sec:    <span class="token number">908.83</span>
+Transfer/sec:     <span class="token number">13</span>.34MB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>分析以上结果</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Running 5s <span class="token builtin class-name">test</span> @ http://www.baidu.com <span class="token comment"># 对 http://www.baidu.com 性能测试 5 秒</span>
+  <span class="token number">10</span> threads and <span class="token number">100</span> connections <span class="token comment"># 10 个线程运行 100 个连接</span>
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   <span class="token number">182</span>.38ms  <span class="token number">259</span>.62ms   <span class="token number">1</span>.71s    <span class="token number">89.69</span>%
+    Req/Sec   <span class="token number">100.21</span>    <span class="token number">122.58</span>   <span class="token number">839.00</span>     <span class="token number">96.38</span>%
+    <span class="token comment"># 每秒完成 100.21 个请求中平均响应时间 182.38ms</span>
+    <span class="token comment"># 每秒完成 122.58 个请求中标准差响应时间 259.62ms (如果相差太大, 说明服务器不太稳定)</span>
+    <span class="token comment"># 每秒完成 839.00 个请求中最大响应时间 1.71.s</span>
+  Latency Distribution
+     <span class="token number">50</span>%   <span class="token number">11</span>.54ms <span class="token comment"># 50% 的请求在 11.54ms 以内处理完成</span>
+     <span class="token number">75</span>%  <span class="token number">268</span>.11ms <span class="token comment"># 75% 的请求在 268.11ms 以内处理完成</span>
+     <span class="token number">90</span>%  <span class="token number">468</span>.33ms <span class="token comment"># 90% 的请求在 468.33ms 以内处理完成</span>
+     <span class="token number">99</span>%    <span class="token number">1</span>.26s  <span class="token comment"># 99% 的请求在 1.26s 以内处理完成</span>
+  <span class="token number">4552</span> requests <span class="token keyword">in</span> <span class="token number">5</span>.01s, <span class="token number">66</span>.82MB <span class="token builtin class-name">read</span> <span class="token comment"># 5.01s 处理完成 4552 个请求, 一共读取了 66.82MB 数据</span>
+  Socket errors: connect <span class="token number">0</span>, <span class="token builtin class-name">read</span> <span class="token number">0</span>, <span class="token function">write</span> <span class="token number">0</span>, <span class="token function">timeout</span> <span class="token number">2</span> <span class="token comment"># 2 个请求超时</span>
+Requests/sec:    <span class="token number">908.83</span> <span class="token comment"># 每秒完成 908.83 个请求</span>
+Transfer/sec:     <span class="token number">13</span>.34MB <span class="token comment"># 每秒读取 13.34MB 数据</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/31/react-ssr-with-nextjs/" rel="prev" title="node 版本管理工具">
+                  <i class="fa fa-chevron-left"></i> node 版本管理工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/11/manual-build-php-environment/" rel="next" title="手动搭建php环境(win系统)">
+                  手动搭建php环境(win系统) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MiDouShiTongTong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>
