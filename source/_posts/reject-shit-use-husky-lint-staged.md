@@ -26,7 +26,7 @@ husky 是一个用于给 `git` 相关操作添加钩子的工具，通过 husky 
 
 1. 安装依赖库
 
-```shell
+```bash
 yarn add --dev husky lint-staged
 ```
 

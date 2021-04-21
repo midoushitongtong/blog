@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - '15'
+before_install:
+  - export TZ=Asia/Shanghai
 script: yarn build
 deploy:
   provider: pages

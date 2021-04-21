@@ -24,7 +24,7 @@ categories:
 
 `图中点进去获取真实的下载链接后, 使用 wget 进行下载`
 
-```shell
+```bash
 wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar
 ```
 
@@ -32,7 +32,7 @@ wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.2
 
 ##### 步骤 3: 安装服务端
 
-```shell
+```bash
 java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer
 ```
 
@@ -44,7 +44,7 @@ java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer
 
 ##### 步骤 4: 一切就绪, 启动服务端
 
-```shell
+```bash
 java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui
 ```
 
