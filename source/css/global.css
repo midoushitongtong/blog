@@ -8,12 +8,25 @@
   box-shadow: 0 0 10px #fea203, 0 0 5px #fea203 !important;
 }
 
-/* 覆盖默认的样式 */
+/* 覆盖 next 主题默认的样式 */
 .post-body h3 {
   font-size: 1.15em;
   border-bottom: 2px solid #dfdfdf;
 }
-
 .post-body h4 {
   font-size: 1em;
+}
+
+/* 自己的样式 */
+.cdn-provider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cdn-provider a {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.cdn-provider a img {
+  max-width: 59px;
 }
