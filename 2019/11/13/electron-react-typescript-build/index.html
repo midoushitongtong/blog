@@ -16,9 +16,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/nprogress.css">
+  <script src="/js/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
@@ -32,7 +32,7 @@
 <meta property="og:description" content="前言最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。 到目前为止 github 上比较流行的相关脚手架  react-boilerplate start 数量较多，但不支持 typescript react-typescrip">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-13T13:23:23.000Z">
-<meta property="article:modified_time" content="2021-04-21T17:24:43.471Z">
+<meta property="article:modified_time" content="2021-04-23T11:55:51.612Z">
 <meta property="article:author" content="MiDouShiTongTong">
 <meta property="article:tag" content="迷都是通通 &#39;s Blog">
 <meta name="twitter:card" content="summary">
@@ -187,7 +187,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">基本环境搭建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">项目打包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#github"><span class="nav-number">4.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">基本环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-react-typescript-%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.1.</span> <span class="nav-text">创建 react + typescript 项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-react-app-rewired-%E4%BB%A5%E5%8F%8A-cross-env"><span class="nav-number">2.2.</span> <span class="nav-text">安装 react-app-rewired 以及 cross-env</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-react-app-rewired-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-overrides-js-%E7%94%A8%E4%BA%8E%E6%89%A9%E5%B1%95-webpack-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.</span> <span class="nav-text">创建 react-app-rewired 配置文件 config-overrides.js 用于扩展 webpack 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-electron-%E7%8E%AF%E5%A2%83"><span class="nav-number">2.4.</span> <span class="nav-text">安装 electron 环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-electron-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-number">2.5.</span> <span class="nav-text">创建 electron 入口文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC"><span class="nav-number">2.6.</span> <span class="nav-text">添加相关脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-electron-%E5%8F%8A-node-js-%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E9%9B%86%E6%88%90%E5%AE%8C%E6%AF%95"><span class="nav-number">2.7.</span> <span class="nav-text">添加 electron 及 node.js 相关代码，用于测试是否集成完毕</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">2.8.</span> <span class="nav-text">运行测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">项目打包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-electron-builder-%E5%B7%A5%E5%85%B7"><span class="nav-number">3.1.</span> <span class="nav-text">添加 electron-builder 工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC%E4%BB%A5%E5%8F%8A%E6%89%93%E5%8C%85%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">添加脚本以及打包相关配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%89%93%E5%8C%85"><span class="nav-number">3.3.</span> <span class="nav-text">开始打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#github"><span class="nav-number">3.4.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -295,7 +295,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
 <p><code>到目前为止 github 上比较流行的相关脚手架</code></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">react-boilerplate</a> start 数量较多，但不支持 typescript</li>
@@ -311,20 +311,11 @@
 <li>修改 electron 入口文件，使用 mainWindow.loadURL 方法加载 react 页面，分为<code>开发环境</code>和<code>生产环境</code></li>
 <li>使用 electron-builder 打包项目</li>
 </ul>
-<h5 id="基本环境搭建"><a href="#基本环境搭建" class="headerlink" title="基本环境搭建"></a>基本环境搭建</h5><ol>
-<li>创建 react + typescript 项目</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx create-react-app my-app --typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="基本环境搭建"><a href="#基本环境搭建" class="headerlink" title="基本环境搭建"></a>基本环境搭建</h3><h4 id="创建-react-typescript-项目"><a href="#创建-react-typescript-项目" class="headerlink" title="创建 react + typescript 项目"></a>创建 react + typescript 项目</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx create-react-app my-app --typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>安装 react-app-rewired 以及 cross-env</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D react-app-rewired cross-env<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装-react-app-rewired-以及-cross-env"><a href="#安装-react-app-rewired-以及-cross-env" class="headerlink" title="安装 react-app-rewired 以及 cross-env"></a>安装 react-app-rewired 以及 cross-env</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D react-app-rewired cross-env<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="3">
-<li>创建 react-app-rewired 配置文件 <code>config-overrides.js</code> 用于扩展 webpack 配置</li>
-</ol>
-<p><code>/config-overrides.js</code></p>
+<h4 id="创建-react-app-rewired-配置文件-config-overrides-js-用于扩展-webpack-配置"><a href="#创建-react-app-rewired-配置文件-config-overrides-js-用于扩展-webpack-配置" class="headerlink" title="创建 react-app-rewired 配置文件 config-overrides.js 用于扩展 webpack 配置"></a>创建 react-app-rewired 配置文件 <code>config-overrides.js</code> 用于扩展 webpack 配置</h4><p><code>/config-overrides.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// 为了方便使用 electron 以及 node.js 相关的 api</span>
   <span class="token comment">// 需要将 target 设置为 electron-renderer</span>
@@ -335,15 +326,9 @@
   <span class="token keyword">return</span> config<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="4">
-<li>安装 electron 环境</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装-electron-环境"><a href="#安装-electron-环境" class="headerlink" title="安装 electron 环境"></a>安装 electron 环境</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="5">
-<li>创建 electron 入口文件</li>
-</ol>
-<p><code>/main.js</code></p>
+<h4 id="创建-electron-入口文件"><a href="#创建-electron-入口文件" class="headerlink" title="创建 electron 入口文件"></a>创建 electron 入口文件</h4><p><code>/main.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> app<span class="token punctuation">,</span> BrowserWindow <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'electron'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -385,10 +370,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token keyword">if</span> <span class="token punctuation">(</span>mainWindow <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">createWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="6">
-<li>添加相关脚本</li>
-</ol>
-<p><code>/package.json</code></p>
+<h4 id="添加相关脚本"><a href="#添加相关脚本" class="headerlink" title="添加相关脚本"></a>添加相关脚本</h4><p><code>/package.json</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
   <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"cross-env BROWSER=none react-app-rewired start"</span><span class="token punctuation">,</span>
   <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"react-app-rewired build"</span><span class="token punctuation">,</span>
@@ -398,10 +380,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token string">"start-electron-prod"</span><span class="token operator">:</span> <span class="token string">"electron ."</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="7">
-<li>添加 electron 及 node.js 相关代码，用于测试是否集成完毕</li>
-</ol>
-<p><code>/src/App.tsx</code></p>
+<h4 id="添加-electron-及-node-js-相关代码，用于测试是否集成完毕"><a href="#添加-electron-及-node-js-相关代码，用于测试是否集成完毕" class="headerlink" title="添加 electron 及 node.js 相关代码，用于测试是否集成完毕"></a>添加 electron 及 node.js 相关代码，用于测试是否集成完毕</h4><p><code>/src/App.tsx</code></p>
 <pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> remote <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'electron'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">'fs'</span><span class="token punctuation">;</span>
@@ -455,24 +434,15 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="8">
-<li>运行测试</li>
-</ol>
-<p><code>一个命令行窗口跑 react 项目</code></p>
+<h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><p><code>一个命令行窗口跑 react 项目</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>另一个命令行窗口跑 electron 项目</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start-electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h5 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h5><ol>
-<li>添加 electron-builder 工具</li>
-</ol>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> electron<span class="token operator">-</span>builder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h3><h4 id="添加-electron-builder-工具"><a href="#添加-electron-builder-工具" class="headerlink" title="添加 electron-builder 工具"></a>添加 electron-builder 工具</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> electron<span class="token operator">-</span>builder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>添加脚本以及打包相关配置</li>
-</ol>
-<p><code>/package.json</code></p>
+<h4 id="添加脚本以及打包相关配置"><a href="#添加脚本以及打包相关配置" class="headerlink" title="添加脚本以及打包相关配置"></a>添加脚本以及打包相关配置</h4><p><code>/package.json</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">"homepage"</span><span class="token operator">:</span> <span class="token string">"./"</span><span class="token punctuation">,</span>
 <span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
   <span class="token string">"build-electron"</span><span class="token operator">:</span> <span class="token string">"electron-builder"</span>
@@ -494,10 +464,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>开始打包</li>
-</ol>
-<p><code>打包 react</code></p>
+<h4 id="开始打包"><a href="#开始打包" class="headerlink" title="开始打包"></a>开始打包</h4><p><code>打包 react</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>react 打包完成后，可以运行 electron 生产环境查看一下功能是否正常运行</code></p>
@@ -506,9 +473,9 @@ app<span class="token punctuation">.</span><span class="token function">on</span
 <p><code>打包 electron 项目为安装包，安装包会生成到指定的 build-electron 目录</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build-electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><code>以上就是 react + typescript + electron 大致配置流程</code><br><code>更详细的配置请查阅官方文档</code></p>
-<h5 id="github"><a href="#github" class="headerlink" title="github"></a>github</h5><p><a target="_blank" rel="noopener" href="https://github.com/MiDouShiTongTong/react-electron-boilerplate">react-electron-boilerplate</a></p>
-<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p><a target="_blank" rel="noopener" href="https://magicly.me/electron-starter">https://magicly.me/electron-starter</a></p>
+<p><code>以上就是 react + typescript + electron 大致配置流程, 更详细的配置请查阅官方文档</code></p>
+<h4 id="github"><a href="#github" class="headerlink" title="github"></a>github</h4><p><a target="_blank" rel="noopener" href="https://github.com/MiDouShiTongTong/react-electron-boilerplate">react-electron-boilerplate</a></p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://magicly.me/electron-starter">https://magicly.me/electron-starter</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/building-an-electron-application-with-create-react-app-97945861647c">https://www.freecodecamp.org/news/building-an-electron-application-with-create-react-app-97945861647c</a></p>
 
     </div>
@@ -586,8 +553,8 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/pjax.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [

@@ -16,25 +16,25 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/nprogress.css">
+  <script src="/js/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"midoushitongtong.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）1. 下载 windows 版 apache 启动器 下载 windows 版 apache 启动器传送门 选择64位或者32位的启动器下载即可">
+<meta name="description" content="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）下载 windows 版 apache 启动器 下载 windows 版 apache 启动器传送门 选择64位或者32位的启动器下载即可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手动搭建php环境(win系统)">
 <meta property="og:url" content="https://midoushitongtong.github.io/2019/08/11/manual-build-php-environment/index.html">
 <meta property="og:site_name" content="迷都是通通 &#39;s Blog">
-<meta property="og:description" content="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）1. 下载 windows 版 apache 启动器 下载 windows 版 apache 启动器传送门 选择64位或者32位的启动器下载即可">
+<meta property="og:description" content="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）下载 windows 版 apache 启动器 下载 windows 版 apache 启动器传送门 选择64位或者32位的启动器下载即可">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://midoushitongtong.github.io/images/post/2.png">
 <meta property="og:image" content="https://midoushitongtong.github.io/images/post/3.png">
 <meta property="article:published_time" content="2019-08-11T08:35:35.000Z">
-<meta property="article:modified_time" content="2021-04-21T17:24:43.471Z">
+<meta property="article:modified_time" content="2021-04-23T11:55:51.612Z">
 <meta property="article:author" content="MiDouShiTongTong">
 <meta property="article:tag" content="迷都是通通 &#39;s Blog">
 <meta name="twitter:card" content="summary">
@@ -190,7 +190,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA-apache-php-%E7%8E%AF%E5%A2%83%E7%9A%84%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B%EF%BC%88%E9%97%B2%E5%BE%97%E6%85%8C%E7%B3%BB%E5%88%97%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD-windows-%E7%89%88-apache-%E5%90%AF%E5%8A%A8%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">1. 下载 windows 版 apache 启动器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD-windows-%E7%89%88-php"><span class="nav-number">1.2.</span> <span class="nav-text">2. 下载 windows 版 php</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-apache"><span class="nav-number">1.3.</span> <span class="nav-text">3. 配置 apache</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AE-php"><span class="nav-number">1.4.</span> <span class="nav-text">4. 配置 php</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-%E5%AE%89%E8%A3%85-apache-%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.5.</span> <span class="nav-text">5. 安装 apache 服务</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-%E6%B5%8B%E8%AF%95"><span class="nav-number">1.6.</span> <span class="nav-text">6. 测试</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apache-%E5%A4%9A%E7%AB%AF%E5%8F%A3%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%95%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">apache 多端口虚拟目录映射配置</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA-apache-php-%E7%8E%AF%E5%A2%83%E7%9A%84%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B%EF%BC%88%E9%97%B2%E5%BE%97%E6%85%8C%E7%B3%BB%E5%88%97%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-windows-%E7%89%88-apache-%E5%90%AF%E5%8A%A8%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">下载 windows 版 apache 启动器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-windows-%E7%89%88-php"><span class="nav-number">1.2.</span> <span class="nav-text">下载 windows 版 php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-apache"><span class="nav-number">1.3.</span> <span class="nav-text">配置 apache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-php"><span class="nav-number">1.4.</span> <span class="nav-text">配置 php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-apache-%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.5.</span> <span class="nav-text">安装 apache 服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.6.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apache-%E5%A4%9A%E7%AB%AF%E5%8F%A3%E8%99%9A%E6%8B%9F%E7%9B%AE%E5%BD%95%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">apache 多端口虚拟目录映射配置</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -298,20 +298,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h5 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h5><h6 id="1-下载-windows-版-apache-启动器"><a href="#1-下载-windows-版-apache-启动器" class="headerlink" title="1. 下载 windows 版 apache 启动器"></a>1. 下载 windows 版 apache 启动器</h6><ul>
+        <h3 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h3><h4 id="下载-windows-版-apache-启动器"><a href="#下载-windows-版-apache-启动器" class="headerlink" title="下载 windows 版 apache 启动器"></a>下载 windows 版 apache 启动器</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://www.apachehaus.com/cgi-bin/download.plx">下载 windows 版 apache 启动器传送门</a></li>
 <li>选择<code>64</code>位或者<code>32</code>位的启动器下载即可</li>
 <li><img src="/images/post/2.png"></li>
 </ul>
 <span id="more"></span>
 
-<h6 id="2-下载-windows-版-php"><a href="#2-下载-windows-版-php" class="headerlink" title="2. 下载 windows 版 php"></a>2. 下载 windows 版 php</h6><ul>
+<h4 id="下载-windows-版-php"><a href="#下载-windows-版-php" class="headerlink" title="下载 windows 版 php"></a>下载 windows 版 php</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://windows.php.net/download">下载 windows 版 php 传送门</a></li>
 <li>由于我们使用 apache 作为服务器，这里需要选择线程安全的 php 进行下载</li>
 <li>选择<code>64</code>位或者<code>32</code>位的线程安全版本下载即可</li>
 <li><img src="/images/post/3.png"></li>
 </ul>
-<h6 id="3-配置-apache"><a href="#3-配置-apache" class="headerlink" title="3. 配置 apache"></a>3. 配置 apache</h6><ul>
+<h4 id="配置-apache"><a href="#配置-apache" class="headerlink" title="配置 apache"></a>配置 apache</h4><ul>
 <li>将下载的好的 apache 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
 <li>修改 <code>conf/httpd.conf</code> 配置文件</li>
 <li>文件查找 <code>Define SRVROOT</code> ，修改为<code>apache目录地址</code></li>
@@ -349,7 +349,7 @@ PHPIniDir <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/
 <span class="token number">3</span>. 配置文件解析，将.php .html后缀的文件交给php去处理
 AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="4-配置-php"><a href="#4-配置-php" class="headerlink" title="4. 配置 php"></a>4. 配置 php</h6><ul>
+<h4 id="配置-php"><a href="#配置-php" class="headerlink" title="配置 php"></a>配置 php</h4><ul>
 <li>将下载的好的 php 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
 <li>复制 <code>php.ini-development</code> 文件, 改为文件名称为 <code>php.ini</code></li>
 <li>修改 <code>php.ini</code> 配置文件</li>
@@ -367,14 +367,12 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 <span class="token assign-left variable">extension</span><span class="token operator">=</span>pdo_mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>文件查找 upload_tmp_dir，修改临时上传目录</li>
-<li>注意目录需要自己手动创建</li>
+<li>文件查找 upload_tmp_dir，修改临时上传目录 <code>注意目录需要自己手动创建</code></li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">upload_tmp_dir <span class="token operator">=</span> <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_upload_tmp"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>文件查找 session.save_path，修改 session 数据存放目录</li>
-<li>注意目录需要自己手动创建</li>
+<li>文件查找 session.save_path，修改 session 数据存放目录 <code>注意目录需要自己手动创建</code></li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">session.save_path <span class="token operator">=</span> <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_session_tmp"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -383,7 +381,7 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">date.timezone <span class="token operator">=</span> Asia/Shanghai<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h6 id="5-安装-apache-服务"><a href="#5-安装-apache-服务" class="headerlink" title="5. 安装 apache 服务"></a>5. 安装 apache 服务</h6><ul>
+<h4 id="安装-apache-服务"><a href="#安装-apache-服务" class="headerlink" title="安装 apache 服务"></a>安装 apache 服务</h4><ul>
 <li>打开命令行窗口进行操作</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">进入apache的bin目录
@@ -392,7 +390,7 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 安装 apache 服务
 httpd.exe -k <span class="token function">install</span> -n <span class="token string">"apache"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="6-测试"><a href="#6-测试" class="headerlink" title="6. 测试"></a>6. 测试</h6><ul>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
 <li>启动 apache 服务器</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net start apache<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -400,7 +398,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <ul>
 <li>浏览器访问<a target="_blank" rel="noopener" href="http://127.0.0.0/">http://127.0.0.0</a></li>
 </ul>
-<h5 id="apache-多端口虚拟目录映射配置"><a href="#apache-多端口虚拟目录映射配置" class="headerlink" title="apache 多端口虚拟目录映射配置"></a>apache 多端口虚拟目录映射配置</h5><ul>
+<h3 id="apache-多端口虚拟目录映射配置"><a href="#apache-多端口虚拟目录映射配置" class="headerlink" title="apache 多端口虚拟目录映射配置"></a>apache 多端口虚拟目录映射配置</h3><ul>
 <li>修改 <code>conf/httpd.conf</code>，以下为参考配置</li>
 </ul>
 <pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token comment"># 监听80端口</span>
@@ -515,8 +513,8 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/pjax.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [

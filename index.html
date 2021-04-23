@@ -16,9 +16,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/nprogress.css">
+  <script src="/js/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
@@ -292,11 +292,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>备注: 此搭建方法不限制与 <code>linux</code> 或 <code>windows</code>, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。</p>
-<h5 id="步骤-1-你需要准备什么？"><a href="#步骤-1-你需要准备什么？" class="headerlink" title="步骤 1: 你需要准备什么？"></a>步骤 1: 你需要准备什么？</h5><ul>
+<h3 id="步骤-1-你需要准备什么？"><a href="#步骤-1-你需要准备什么？" class="headerlink" title="步骤 1: 你需要准备什么？"></a>步骤 1: 你需要准备什么？</h3><ul>
 <li>一台服务器(window, linux 均可)</li>
 <li>java <code>8</code> 环境(别问为什么是 8, 问就是兼容性)</li>
 </ul>
-<h5 id="步骤-2-下载服务端"><a href="#步骤-2-下载服务端" class="headerlink" title="步骤 2: 下载服务端"></a>步骤 2: 下载服务端</h5><p>备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。</p>
+<h3 id="步骤-2-下载服务端"><a href="#步骤-2-下载服务端" class="headerlink" title="步骤 2: 下载服务端"></a>步骤 2: 下载服务端</h3><p>备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/23/minecraft-server-build-mod-plugin/#more" rel="contents">
@@ -376,7 +376,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近再补有关 <a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/hooks-reference.html">react hook</a> 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 <code>state</code>，并且可以使用 <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>shouldComponentUpdate</code> 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 <code>useReducer</code> 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 <code>redux</code> 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 <code>完全取代</code> redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。</p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近再补有关 <a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/hooks-reference.html">react hook</a> 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 <code>state</code>，并且可以使用 <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>shouldComponentUpdate</code> 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 <code>useReducer</code> 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 <code>redux</code> 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 <code>完全取代</code> redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/12/29/cant-replace-redux-with-hooks/#more" rel="contents">
@@ -456,8 +456,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><h6 id="husky"><a href="#husky" class="headerlink" title="husky"></a>husky</h6><p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
-<h6 id="lint-staged"><a href="#lint-staged" class="headerlink" title="lint-staged"></a>lint-staged</h6><p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
+          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p><code>husky</code></p>
+<p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
+<p><code>lint-staged</code></p>
+<p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
 <blockquote>
 <p>&#x1f6ab;&#x1f4a9; lint-staged<br>Run linters against staged git files and don’t let &#x1f4a9; slip into your code base!</p>
 </blockquote>
@@ -541,7 +543,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h5><p>snack 地址: <a target="_blank" rel="noopener" href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
+          <h3 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h3><p>snack 地址: <a target="_blank" rel="noopener" href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
 <p>可以通过 <a target="_blank" rel="noopener" href="https://expo.io/">expo</a>，在你的设备上直接运行它。</p>
 <p><img src="/images/post/4.gif"></p>
           <!--noindex-->
@@ -623,7 +625,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
 <p><code>到目前为止 github 上比较流行的相关脚手架</code></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">react-boilerplate</a> start 数量较多，但不支持 typescript</li>
@@ -709,7 +711,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h5><h6 id="1-下载-windows-版-apache-启动器"><a href="#1-下载-windows-版-apache-启动器" class="headerlink" title="1. 下载 windows 版 apache 启动器"></a>1. 下载 windows 版 apache 启动器</h6><ul>
+          <h3 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h3><h4 id="下载-windows-版-apache-启动器"><a href="#下载-windows-版-apache-启动器" class="headerlink" title="下载 windows 版 apache 启动器"></a>下载 windows 版 apache 启动器</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://www.apachehaus.com/cgi-bin/download.plx">下载 windows 版 apache 启动器传送门</a></li>
 <li>选择<code>64</code>位或者<code>32</code>位的启动器下载即可</li>
 <li><img src="/images/post/2.png"></li>
@@ -793,7 +795,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="wrk-有什么用？"><a href="#wrk-有什么用？" class="headerlink" title="wrk 有什么用？"></a>wrk 有什么用？</h5><p>wrk 是一个的 http 压力测试工具。<br>我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。</p>
+          <h3 id="wrk-有什么用？"><a href="#wrk-有什么用？" class="headerlink" title="wrk 有什么用？"></a>wrk 有什么用？</h3><p>wrk 是一个的 http 压力测试工具。<br>我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/04/15/http-benchmark-wrk/#more" rel="contents">
@@ -827,7 +829,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/01/31/react-ssr-with-nextjs/">
+    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/01/31/node-version-manage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -840,7 +842,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/31/react-ssr-with-nextjs/" class="post-title-link" itemprop="url">node 版本管理工具</a>
+          <a href="/2019/01/31/node-version-manage/" class="post-title-link" itemprop="url">node 版本管理工具</a>
         </h2>
 
         <div class="post-meta-container">
@@ -873,14 +875,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近在搭建一个开源项目的时候，需要 <code>Node v8</code> 的环境才能运行，但本地的环境是 <code>Node v10</code> , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。</p>
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在搭建一个开源项目的时候，需要 <code>Node v8</code> 的环境才能运行，但本地的环境是 <code>Node v10</code> , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/tj/n" title="n">n</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/creationix/nvm">nvm</a></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/31/react-ssr-with-nextjs/#more" rel="contents">
+              <a class="btn" href="/2019/01/31/node-version-manage/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -911,7 +913,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/01/15/node-version-manage/">
+    <link itemprop="mainEntityOfPage" href="https://midoushitongtong.github.io/2019/01/15/react-ssr-with-nextjs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -924,7 +926,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/15/node-version-manage/" class="post-title-link" itemprop="url">react 服务端渲染之 next.js</a>
+          <a href="/2019/01/15/react-ssr-with-nextjs/" class="post-title-link" itemprop="url">react 服务端渲染之 next.js</a>
         </h2>
 
         <div class="post-meta-container">
@@ -957,7 +959,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="为什么使用-Next-js-来做-React-服务端渲染"><a href="#为什么使用-Next-js-来做-React-服务端渲染" class="headerlink" title="为什么使用 Next.js 来做 React 服务端渲染 ?"></a>为什么使用 Next.js 来做 React 服务端渲染 ?</h5><ul>
+          <h3 id="为什么使用-Next-js-来做-React-服务端渲染"><a href="#为什么使用-Next-js-来做-React-服务端渲染" class="headerlink" title="为什么使用 Next.js 来做 React 服务端渲染 ?"></a>为什么使用 Next.js 来做 React 服务端渲染 ?</h3><ul>
 <li>轻量级，简单易懂，仅需学习几个核心的 API 就可上手开发</li>
 <li>易扩展, 与 <a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-express" title="express">express</a>, <a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-koa" title="koa">koa</a> 等 node 框架无缝接入</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/ssr-caching" title="缓存 ssr 页面">支持缓存</a></li>
@@ -965,7 +967,7 @@
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/15/node-version-manage/#more" rel="contents">
+              <a class="btn" href="/2019/01/15/react-ssr-with-nextjs/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1042,7 +1044,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="干了啥？"><a href="#干了啥？" class="headerlink" title="干了啥？"></a>干了啥？</h5><ul>
+          <h3 id="干了啥？"><a href="#干了啥？" class="headerlink" title="干了啥？"></a>干了啥？</h3><ul>
 <li><code>一月</code> 一月以及前面几个月都在和 java se 斗智斗勇。</li>
 <li><code>二月</code> 还是与 java se 斗智斗勇，因为过年以及玩心太大，整个二月没有几天是静下心来学习的。</li>
 <li><code>三月</code> 开学了，试着把放假的心收回来，慢慢的回到了 java se 的知识海洋。</li>
@@ -1123,8 +1125,8 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/pjax.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [

@@ -3,19 +3,16 @@
   <entry>
     <title>可能不需要 redux 了, 但不该用 hook 去取代它</title>
     <url>/2019/12/29/cant-replace-redux-with-hooks/</url>
-    <content><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近再补有关 <a href="https://zh-hans.reactjs.org/docs/hooks-reference.html">react hook</a> 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 <code>state</code>，并且可以使用 <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>shouldComponentUpdate</code> 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 <code>useReducer</code> 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 <code>redux</code> 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 <code>完全取代</code> redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。</p>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近再补有关 <a href="https://zh-hans.reactjs.org/docs/hooks-reference.html">react hook</a> 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 <code>state</code>，并且可以使用 <code>componentDidMount</code>, <code>componentDidUpdate</code>, <code>shouldComponentUpdate</code> 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 <code>useReducer</code> 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 <code>redux</code> 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 <code>完全取代</code> redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。</p>
 <span id="more"></span>
 
-<h5 id="如何使用-hook-取代-redux"><a href="#如何使用-hook-取代-redux" class="headerlink" title="如何使用 hook 取代 redux"></a>如何使用 hook 取代 redux</h5><p>思路：</p>
+<h3 id="如何使用-hook-取代-redux"><a href="#如何使用-hook-取代-redux" class="headerlink" title="如何使用 hook 取代 redux"></a>如何使用 hook 取代 redux</h3><p>思路：</p>
 <ul>
 <li>使用 useReducer 维护 state，这一步用于取代 redux</li>
 <li>使用 createContext 让 state 进行提升，这一步用于取代 react-redux</li>
 </ul>
 <p>具体步骤:</p>
-<ol>
-<li>创建名叫 <code>toDoStore.ts</code> 的文件，从文件名大概可以知道，这个文件是用来管理 state 的。</li>
-</ol>
-<pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> useReducer<span class="token punctuation">,</span> useContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<h4 id="创建名叫-toDoStore-ts-的文件，从文件名大概可以知道，这个文件是用来管理-state-的。"><a href="#创建名叫-toDoStore-ts-的文件，从文件名大概可以知道，这个文件是用来管理-state-的。" class="headerlink" title="创建名叫 toDoStore.ts 的文件，从文件名大概可以知道，这个文件是用来管理 state 的。"></a>创建名叫 <code>toDoStore.ts</code> 的文件，从文件名大概可以知道，这个文件是用来管理 state 的。</h4><pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> useReducer<span class="token punctuation">,</span> useContext <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 
 <span class="token comment">// state</span>
 <span class="token keyword">interface</span> <span class="token class-name">ToDoState</span> <span class="token punctuation">&#123;</span>
@@ -99,10 +96,7 @@
 
 <span class="token keyword">export</span> <span class="token punctuation">&#123;</span> ToDoStoreContextProvider<span class="token punctuation">,</span> useToDoContext<span class="token punctuation">,</span> ToDoActionType <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="2">
-<li>创建一个或者多个组件，用于获取的 state，以及调用 dispatch 来改变的 state</li>
-</ol>
-<pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<h4 id="创建一个或者多个组件，用于获取的-state，以及调用-dispatch-来改变的-state"><a href="#创建一个或者多个组件，用于获取的-state，以及调用-dispatch-来改变的-state" class="headerlink" title="创建一个或者多个组件，用于获取的 state，以及调用 dispatch 来改变的 state"></a>创建一个或者多个组件，用于获取的 state，以及调用 dispatch 来改变的 state</h4><pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useToDoContext<span class="token punctuation">,</span> ToDoActionType <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./toDoStore'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> ShowToDoState<span class="token operator">:</span> React<span class="token punctuation">.</span><span class="token function-variable function">FunctionComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -150,10 +144,7 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> App<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>将最顶部组件用 ToDoStoreContextProvider 进行包裹，这样子组件才能进行订阅 context 的变化</li>
-</ol>
-<pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<h4 id="将最顶部组件用-ToDoStoreContextProvider-进行包裹，这样子组件才能进行订阅-context-的变化"><a href="#将最顶部组件用-ToDoStoreContextProvider-进行包裹，这样子组件才能进行订阅-context-的变化" class="headerlink" title="将最顶部组件用 ToDoStoreContextProvider 进行包裹，这样子组件才能进行订阅 context 的变化"></a>将最顶部组件用 ToDoStoreContextProvider 进行包裹，这样子组件才能进行订阅 context 的变化</h4><pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> ReactDOM <span class="token keyword">from</span> <span class="token string">'react-dom'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ToDoStoreContextProvider <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./toDoStore'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span><span class="token punctuation">;</span>
@@ -169,7 +160,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <iframe height="450" width="740" src="https://codesandbox.io/embed/cant-replace-redux-with-hooks-fru24?fontsize=14&hidenavigation=1&theme=dark" frameborder="0" allowfullscreen>
 </iframe>
 
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>从上面使用 hook 取代 redux 的过程中，会发现有以下几点是 hook 无法满足的：</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从上面使用 hook 取代 redux 的过程中，会发现有以下几点是 hook 无法满足的：</p>
 <ul>
 <li>useReducer 无法进行 combine，这意味着你将不能对 state 进行分组管理，如果你强行对 state 进行分组，那么你将创建多个 context，这无异于提高了整个应用的复杂度</li>
 <li>并没有提供 react-redux 那样的 HOC（mapStateToProps mapDispatchToProps），这意味着你不能快速的查看组件到底使用了那些 state，需要 ctrl + f 来进行确认</li>
@@ -184,7 +175,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <entry>
     <title>electron + react + typescript 环境搭建</title>
     <url>/2019/11/13/electron-react-typescript-build/</url>
-    <content><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。</p>
 <p><code>到目前为止 github 上比较流行的相关脚手架</code></p>
 <ul>
 <li><a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">react-boilerplate</a> start 数量较多，但不支持 typescript</li>
@@ -200,20 +191,11 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <li>修改 electron 入口文件，使用 mainWindow.loadURL 方法加载 react 页面，分为<code>开发环境</code>和<code>生产环境</code></li>
 <li>使用 electron-builder 打包项目</li>
 </ul>
-<h5 id="基本环境搭建"><a href="#基本环境搭建" class="headerlink" title="基本环境搭建"></a>基本环境搭建</h5><ol>
-<li>创建 react + typescript 项目</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx create-react-app my-app --typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="基本环境搭建"><a href="#基本环境搭建" class="headerlink" title="基本环境搭建"></a>基本环境搭建</h3><h4 id="创建-react-typescript-项目"><a href="#创建-react-typescript-项目" class="headerlink" title="创建 react + typescript 项目"></a>创建 react + typescript 项目</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx create-react-app my-app --typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>安装 react-app-rewired 以及 cross-env</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D react-app-rewired cross-env<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装-react-app-rewired-以及-cross-env"><a href="#安装-react-app-rewired-以及-cross-env" class="headerlink" title="安装 react-app-rewired 以及 cross-env"></a>安装 react-app-rewired 以及 cross-env</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D react-app-rewired cross-env<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="3">
-<li>创建 react-app-rewired 配置文件 <code>config-overrides.js</code> 用于扩展 webpack 配置</li>
-</ol>
-<p><code>/config-overrides.js</code></p>
+<h4 id="创建-react-app-rewired-配置文件-config-overrides-js-用于扩展-webpack-配置"><a href="#创建-react-app-rewired-配置文件-config-overrides-js-用于扩展-webpack-配置" class="headerlink" title="创建 react-app-rewired 配置文件 config-overrides.js 用于扩展 webpack 配置"></a>创建 react-app-rewired 配置文件 <code>config-overrides.js</code> 用于扩展 webpack 配置</h4><p><code>/config-overrides.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> env</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// 为了方便使用 electron 以及 node.js 相关的 api</span>
   <span class="token comment">// 需要将 target 设置为 electron-renderer</span>
@@ -224,15 +206,9 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <span class="token keyword">return</span> config<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="4">
-<li>安装 electron 环境</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="安装-electron-环境"><a href="#安装-electron-环境" class="headerlink" title="安装 electron 环境"></a>安装 electron 环境</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i -D electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="5">
-<li>创建 electron 入口文件</li>
-</ol>
-<p><code>/main.js</code></p>
+<h4 id="创建-electron-入口文件"><a href="#创建-electron-入口文件" class="headerlink" title="创建 electron 入口文件"></a>创建 electron 入口文件</h4><p><code>/main.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> app<span class="token punctuation">,</span> BrowserWindow <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'electron'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -274,10 +250,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token keyword">if</span> <span class="token punctuation">(</span>mainWindow <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">createWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="6">
-<li>添加相关脚本</li>
-</ol>
-<p><code>/package.json</code></p>
+<h4 id="添加相关脚本"><a href="#添加相关脚本" class="headerlink" title="添加相关脚本"></a>添加相关脚本</h4><p><code>/package.json</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
   <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"cross-env BROWSER=none react-app-rewired start"</span><span class="token punctuation">,</span>
   <span class="token string">"build"</span><span class="token operator">:</span> <span class="token string">"react-app-rewired build"</span><span class="token punctuation">,</span>
@@ -287,10 +260,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token string">"start-electron-prod"</span><span class="token operator">:</span> <span class="token string">"electron ."</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="7">
-<li>添加 electron 及 node.js 相关代码，用于测试是否集成完毕</li>
-</ol>
-<p><code>/src/App.tsx</code></p>
+<h4 id="添加-electron-及-node-js-相关代码，用于测试是否集成完毕"><a href="#添加-electron-及-node-js-相关代码，用于测试是否集成完毕" class="headerlink" title="添加 electron 及 node.js 相关代码，用于测试是否集成完毕"></a>添加 electron 及 node.js 相关代码，用于测试是否集成完毕</h4><p><code>/src/App.tsx</code></p>
 <pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> remote <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'electron'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">'fs'</span><span class="token punctuation">;</span>
@@ -344,24 +314,15 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="8">
-<li>运行测试</li>
-</ol>
-<p><code>一个命令行窗口跑 react 项目</code></p>
+<h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><p><code>一个命令行窗口跑 react 项目</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>另一个命令行窗口跑 electron 项目</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start-electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h5 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h5><ol>
-<li>添加 electron-builder 工具</li>
-</ol>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> electron<span class="token operator">-</span>builder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h3><h4 id="添加-electron-builder-工具"><a href="#添加-electron-builder-工具" class="headerlink" title="添加 electron-builder 工具"></a>添加 electron-builder 工具</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> electron<span class="token operator">-</span>builder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>添加脚本以及打包相关配置</li>
-</ol>
-<p><code>/package.json</code></p>
+<h4 id="添加脚本以及打包相关配置"><a href="#添加脚本以及打包相关配置" class="headerlink" title="添加脚本以及打包相关配置"></a>添加脚本以及打包相关配置</h4><p><code>/package.json</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">"homepage"</span><span class="token operator">:</span> <span class="token string">"./"</span><span class="token punctuation">,</span>
 <span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
   <span class="token string">"build-electron"</span><span class="token operator">:</span> <span class="token string">"electron-builder"</span>
@@ -383,10 +344,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>开始打包</li>
-</ol>
-<p><code>打包 react</code></p>
+<h4 id="开始打包"><a href="#开始打包" class="headerlink" title="开始打包"></a>开始打包</h4><p><code>打包 react</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>react 打包完成后，可以运行 electron 生产环境查看一下功能是否正常运行</code></p>
@@ -395,9 +353,9 @@ app<span class="token punctuation">.</span><span class="token function">on</span
 <p><code>打包 electron 项目为安装包，安装包会生成到指定的 build-electron 目录</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build-electron<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><code>以上就是 react + typescript + electron 大致配置流程</code><br><code>更详细的配置请查阅官方文档</code></p>
-<h5 id="github"><a href="#github" class="headerlink" title="github"></a>github</h5><p><a href="https://github.com/MiDouShiTongTong/react-electron-boilerplate">react-electron-boilerplate</a></p>
-<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p><a href="https://magicly.me/electron-starter">https://magicly.me/electron-starter</a></p>
+<p><code>以上就是 react + typescript + electron 大致配置流程, 更详细的配置请查阅官方文档</code></p>
+<h4 id="github"><a href="#github" class="headerlink" title="github"></a>github</h4><p><a href="https://github.com/MiDouShiTongTong/react-electron-boilerplate">react-electron-boilerplate</a></p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="https://magicly.me/electron-starter">https://magicly.me/electron-starter</a></p>
 <p><a href="https://www.freecodecamp.org/news/building-an-electron-application-with-create-react-app-97945861647c">https://www.freecodecamp.org/news/building-an-electron-application-with-create-react-app-97945861647c</a></p>
 ]]></content>
       <categories>
@@ -407,10 +365,10 @@ app<span class="token punctuation">.</span><span class="token function">on</span
   <entry>
     <title>http 性能测试工具 wrk</title>
     <url>/2019/04/15/http-benchmark-wrk/</url>
-    <content><![CDATA[<h5 id="wrk-有什么用？"><a href="#wrk-有什么用？" class="headerlink" title="wrk 有什么用？"></a>wrk 有什么用？</h5><p>wrk 是一个的 http 压力测试工具。<br>我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。</p>
+    <content><![CDATA[<h3 id="wrk-有什么用？"><a href="#wrk-有什么用？" class="headerlink" title="wrk 有什么用？"></a>wrk 有什么用？</h3><p>wrk 是一个的 http 压力测试工具。<br>我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。</p>
 <span id="more"></span>
 
-<h5 id="安装-wrk"><a href="#安装-wrk" class="headerlink" title="安装 wrk"></a>安装 wrk</h5><p>Ubuntu</p>
+<h3 id="安装-wrk"><a href="#安装-wrk" class="headerlink" title="安装 wrk"></a>安装 wrk</h3><p>Ubuntu</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential libssl-dev <span class="token function">git</span> -y
 <span class="token function">git</span> clone https://github.com/wg/wrk.git wrk
 <span class="token builtin class-name">cd</span> wrk
@@ -431,7 +389,7 @@ app<span class="token punctuation">.</span><span class="token function">on</span
 <p><a href="https://github.com/wg/wrk/wiki/Installing-wrk-on-Linux">文档</a></p>
 <p>Windows 10</p>
 <p><a href="https://github.com/wg/wrk/wiki/Installing-wrk-on-Windows-10">文档</a></p>
-<h5 id="简单的使用-wrk"><a href="#简单的使用-wrk" class="headerlink" title="简单的使用 wrk"></a>简单的使用 wrk</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wrk -t10 -c100 -d5s --latency  <span class="token string">"http://www.baidu.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="简单的使用-wrk"><a href="#简单的使用-wrk" class="headerlink" title="简单的使用 wrk"></a>简单的使用 wrk</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wrk -t10 -c100 -d5s --latency  <span class="token string">"http://www.baidu.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>以上命令 wrk 会开启 <code>10</code> 个线程来处理 <code>100</code> 个客户端对<code>http://www.baidu.com</code> 进行 <code>5</code> 秒的压力测试</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Running 5s <span class="token builtin class-name">test</span> @ http://www.baidu.com
@@ -476,20 +434,20 @@ Transfer/sec:     <span class="token number">13</span>.34MB <span class="token c
   <entry>
     <title>手动搭建php环境(win系统)</title>
     <url>/2019/08/11/manual-build-php-environment/</url>
-    <content><![CDATA[<h5 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h5><h6 id="1-下载-windows-版-apache-启动器"><a href="#1-下载-windows-版-apache-启动器" class="headerlink" title="1. 下载 windows 版 apache 启动器"></a>1. 下载 windows 版 apache 启动器</h6><ul>
+    <content><![CDATA[<h3 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h3><h4 id="下载-windows-版-apache-启动器"><a href="#下载-windows-版-apache-启动器" class="headerlink" title="下载 windows 版 apache 启动器"></a>下载 windows 版 apache 启动器</h4><ul>
 <li><a href="https://www.apachehaus.com/cgi-bin/download.plx">下载 windows 版 apache 启动器传送门</a></li>
 <li>选择<code>64</code>位或者<code>32</code>位的启动器下载即可</li>
 <li><img src="/images/post/2.png"></li>
 </ul>
 <span id="more"></span>
 
-<h6 id="2-下载-windows-版-php"><a href="#2-下载-windows-版-php" class="headerlink" title="2. 下载 windows 版 php"></a>2. 下载 windows 版 php</h6><ul>
+<h4 id="下载-windows-版-php"><a href="#下载-windows-版-php" class="headerlink" title="下载 windows 版 php"></a>下载 windows 版 php</h4><ul>
 <li><a href="https://windows.php.net/download">下载 windows 版 php 传送门</a></li>
 <li>由于我们使用 apache 作为服务器，这里需要选择线程安全的 php 进行下载</li>
 <li>选择<code>64</code>位或者<code>32</code>位的线程安全版本下载即可</li>
 <li><img src="/images/post/3.png"></li>
 </ul>
-<h6 id="3-配置-apache"><a href="#3-配置-apache" class="headerlink" title="3. 配置 apache"></a>3. 配置 apache</h6><ul>
+<h4 id="配置-apache"><a href="#配置-apache" class="headerlink" title="配置 apache"></a>配置 apache</h4><ul>
 <li>将下载的好的 apache 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
 <li>修改 <code>conf/httpd.conf</code> 配置文件</li>
 <li>文件查找 <code>Define SRVROOT</code> ，修改为<code>apache目录地址</code></li>
@@ -527,7 +485,7 @@ PHPIniDir <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/
 <span class="token number">3</span>. 配置文件解析，将.php .html后缀的文件交给php去处理
 AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="4-配置-php"><a href="#4-配置-php" class="headerlink" title="4. 配置 php"></a>4. 配置 php</h6><ul>
+<h4 id="配置-php"><a href="#配置-php" class="headerlink" title="配置 php"></a>配置 php</h4><ul>
 <li>将下载的好的 php 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
 <li>复制 <code>php.ini-development</code> 文件, 改为文件名称为 <code>php.ini</code></li>
 <li>修改 <code>php.ini</code> 配置文件</li>
@@ -545,14 +503,12 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 <span class="token assign-left variable">extension</span><span class="token operator">=</span>pdo_mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>文件查找 upload_tmp_dir，修改临时上传目录</li>
-<li>注意目录需要自己手动创建</li>
+<li>文件查找 upload_tmp_dir，修改临时上传目录 <code>注意目录需要自己手动创建</code></li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">upload_tmp_dir <span class="token operator">=</span> <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_upload_tmp"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>文件查找 session.save_path，修改 session 数据存放目录</li>
-<li>注意目录需要自己手动创建</li>
+<li>文件查找 session.save_path，修改 session 数据存放目录 <code>注意目录需要自己手动创建</code></li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">session.save_path <span class="token operator">=</span> <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_session_tmp"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -561,7 +517,7 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">date.timezone <span class="token operator">=</span> Asia/Shanghai<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h6 id="5-安装-apache-服务"><a href="#5-安装-apache-服务" class="headerlink" title="5. 安装 apache 服务"></a>5. 安装 apache 服务</h6><ul>
+<h4 id="安装-apache-服务"><a href="#安装-apache-服务" class="headerlink" title="安装 apache 服务"></a>安装 apache 服务</h4><ul>
 <li>打开命令行窗口进行操作</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">进入apache的bin目录
@@ -570,7 +526,7 @@ AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="lin
 安装 apache 服务
 httpd.exe -k <span class="token function">install</span> -n <span class="token string">"apache"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="6-测试"><a href="#6-测试" class="headerlink" title="6. 测试"></a>6. 测试</h6><ul>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
 <li>启动 apache 服务器</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net start apache<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -578,7 +534,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <ul>
 <li>浏览器访问<a href="http://127.0.0.0/">http://127.0.0.0</a></li>
 </ul>
-<h5 id="apache-多端口虚拟目录映射配置"><a href="#apache-多端口虚拟目录映射配置" class="headerlink" title="apache 多端口虚拟目录映射配置"></a>apache 多端口虚拟目录映射配置</h5><ul>
+<h3 id="apache-多端口虚拟目录映射配置"><a href="#apache-多端口虚拟目录映射配置" class="headerlink" title="apache 多端口虚拟目录映射配置"></a>apache 多端口虚拟目录映射配置</h3><ul>
 <li>修改 <code>conf/httpd.conf</code>，以下为参考配置</li>
 </ul>
 <pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token comment"># 监听80端口</span>
@@ -626,40 +582,44 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
     <title>minecraft 服务端搭建, 支持模组(mod) + 插件(plugin)</title>
     <url>/2020/02/23/minecraft-server-build-mod-plugin/</url>
     <content><![CDATA[<p>备注: 此搭建方法不限制与 <code>linux</code> 或 <code>windows</code>, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。</p>
-<h5 id="步骤-1-你需要准备什么？"><a href="#步骤-1-你需要准备什么？" class="headerlink" title="步骤 1: 你需要准备什么？"></a>步骤 1: 你需要准备什么？</h5><ul>
+<h3 id="步骤-1-你需要准备什么？"><a href="#步骤-1-你需要准备什么？" class="headerlink" title="步骤 1: 你需要准备什么？"></a>步骤 1: 你需要准备什么？</h3><ul>
 <li>一台服务器(window, linux 均可)</li>
 <li>java <code>8</code> 环境(别问为什么是 8, 问就是兼容性)</li>
 </ul>
-<h5 id="步骤-2-下载服务端"><a href="#步骤-2-下载服务端" class="headerlink" title="步骤 2: 下载服务端"></a>步骤 2: 下载服务端</h5><p>备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。</p>
+<h3 id="步骤-2-下载服务端"><a href="#步骤-2-下载服务端" class="headerlink" title="步骤 2: 下载服务端"></a>步骤 2: 下载服务端</h3><p>备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。</p>
 <span id="more"></span>
 
 <p><a href="https://files.minecraftforge.net/">https://files.minecraftforge.net</a>。</p>
-<p><img src="https://yyccyy.com/wp-content/uploads/2020/02/minecraft-server-build-1.png"></p>
+<p><img src="/images/post/4.png"></p>
 <p><code>图中点进去获取真实的下载链接后, 使用 wget 进行下载</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行下载, 之后可通过 ftp 上传至服务器。</p>
-<h5 id="步骤-3-安装服务端"><a href="#步骤-3-安装服务端" class="headerlink" title="步骤 3: 安装服务端"></a>步骤 3: 安装服务端</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="步骤-3-安装服务端"><a href="#步骤-3-安装服务端" class="headerlink" title="步骤 3: 安装服务端"></a>步骤 3: 安装服务端</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装过程中需要下载各种资源包, 如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行安装下载, 之后可通过 ftp 上传至服务器。</p>
 <p><code>最终安装完成后, 得到的目录结构</code></p>
-<p><img src="https://yyccyy.com/wp-content/uploads/2020/02/minecraft-server-build-2.png"></p>
-<h5 id="步骤-4-一切就绪-启动服务端"><a href="#步骤-4-一切就绪-启动服务端" class="headerlink" title="步骤 4: 一切就绪, 启动服务端"></a>步骤 4: 一切就绪, 启动服务端</h5><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/images/post/5.png"></p>
+<h3 id="步骤-4-一切就绪-启动服务端"><a href="#步骤-4-一切就绪-启动服务端" class="headerlink" title="步骤 4: 一切就绪, 启动服务端"></a>步骤 4: 一切就绪, 启动服务端</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>第一次启动必然会失败</code>, 原因是我们没有同意相关的协议。</p>
 <p>我们需要同意相关的协议才能启动服务端, 编辑根目录的 <code>eula.txt</code> 文件, 启动服务端后自动生成的文件。</p>
 <p>将 <code>eula</code> 参数设置为 <code>true</code> 。</p>
 <p>再次启动服务端, 大功告成~</p>
-<h5 id="（可选）步骤-5-安装-plugin"><a href="#（可选）步骤-5-安装-plugin" class="headerlink" title="（可选）步骤 5: 安装 plugin"></a>（可选）步骤 5: 安装 plugin</h5><p>在 minecraft forge 的服务端中, 默认是不支持安装 plugin 的, 只支持安装 mod。</p>
+<h3 id="（可选）步骤-5-安装-plugin"><a href="#（可选）步骤-5-安装-plugin" class="headerlink" title="（可选）步骤 5: 安装 plugin"></a>（可选）步骤 5: 安装 plugin</h3><p>在 minecraft forge 的服务端中, 默认是不支持安装 plugin 的, 只支持安装 mod。</p>
 <p>但如果想在 minecraft forge 的服务端中安装 plugin, 也是非常非常简单的。</p>
 <p>1.我们需要下载 SpongeForge 来作为运行插件的前提, <a href="https://www.spongepowered.org/downloads">https://www.spongepowered.org/downloads</a></p>
-<p><img src="https://yyccyy.com/wp-content/uploads/2020/02/minecraft-server-build-3.png"></p>
+<p><img src="/images/post/6.png"></p>
 <p>2.将下好的 .jar 文件放入 mods 目录中, <code>客户端不需要放, 只需要放在服务端</code>。</p>
 <p>3.有了运行插件的前提, 现在可以下载你需要的插件, <a href="https://ore.spongepowered.org/">https://ore.spongepowered.org</a>, 将下载好的插件(.jar 文件), 同样的放入 mods 目录中, <code>与上面一样的是, 客户端不需要放, 只需要放在服务端</code>。</p>
 <p>备注: 在 minecraft forge 的服务端中, 不管是 mod 还是 plugin 都放在 <code>mods</code> 目录中, 而不像其他服务端可能存在有 <code>plugins</code> 的目录。</p>
-<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><p>这里推荐两个 plugin, 用于管理服务器的权限</p>
-<p>1.Nucles <a href="https://ore.spongepowered.org/Nucleus/Nucleus">https://ore.spongepowered.org/Nucleus/Nucleus</a>, 提供了各种各样的权限配置, 但配置起来不是很方便, 其官方也是推荐是使用别的 plugin 来简化权限的配置。</p>
-<p>2.LuckPerms <a href="https://ore.spongepowered.org/Luck/LuckPerms">https://ore.spongepowered.org/Luck/LuckPerms</a>, 专门用于高度定制化权限, 与 Nucles 使用效果可达最佳化。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>这里推荐两个 plugin, 用于管理服务器的权限</p>
+<ul>
+<li><p>Nucles <a href="https://ore.spongepowered.org/Nucleus/Nucleus">https://ore.spongepowered.org/Nucleus/Nucleus</a>, 提供了各种各样的权限配置, 但配置起来不是很方便, 其官方也是推荐是使用别的 plugin 来简化权限的配置。</p>
+</li>
+<li><p>LuckPerms <a href="https://ore.spongepowered.org/Luck/LuckPerms">https://ore.spongepowered.org/Luck/LuckPerms</a>, 专门用于高度定制化权限, 与 Nucles 使用效果可达最佳化。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>生活札记</category>
@@ -668,7 +628,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   <entry>
     <title>我的 2018</title>
     <url>/2019/01/05/my-2018/</url>
-    <content><![CDATA[<h5 id="干了啥？"><a href="#干了啥？" class="headerlink" title="干了啥？"></a>干了啥？</h5><ul>
+    <content><![CDATA[<h3 id="干了啥？"><a href="#干了啥？" class="headerlink" title="干了啥？"></a>干了啥？</h3><ul>
 <li><code>一月</code> 一月以及前面几个月都在和 java se 斗智斗勇。</li>
 <li><code>二月</code> 还是与 java se 斗智斗勇，因为过年以及玩心太大，整个二月没有几天是静下心来学习的。</li>
 <li><code>三月</code> 开学了，试着把放假的心收回来，慢慢的回到了 java se 的知识海洋。</li>
@@ -686,12 +646,12 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <li><code>十一月</code> 前端是学不完的，开始学习 react，发现这东西比 vue 要麻烦不少。但是两者都各有各的优势，一个是简单，一个是自由。在摸爬滚打的情况下，最终还是美好的，也用 react 技术栈也写了一个小项目。</li>
 <li><code>十二月</code> 前端是永远学不完的，开始学习 angular2，由于需要前置知识，就先大概学了一下 typescript 和 rxjs，经过一些摸索，尽管没有用 angular2 做一些小的项目，也对 angular2 的开发有了一个初略的认识。</li>
 </ul>
-<h5 id="遇到了啥问题？"><a href="#遇到了啥问题？" class="headerlink" title="遇到了啥问题？"></a>遇到了啥问题？</h5><p>这一年里，学习到了很多以前没接触过的新知识，学习的过程中也走了不少的弯路，期间遇到问题也都是从网上查阅资料，虽然经过了一段时间的摸索，问题也都得以解决，但自己并没有系统的整理过自己所遇到的问题。在此将我在 2019 遇到的一些问题记录下来。</p>
-<h6 id="1-vue-react-angular-多个前端项目如何部署在一台服务器。"><a href="#1-vue-react-angular-多个前端项目如何部署在一台服务器。" class="headerlink" title="1. vue, react, angular 多个前端项目如何部署在一台服务器。"></a>1. vue, react, angular 多个前端项目如何部署在一台服务器。</h6><ul>
+<h3 id="遇到了啥问题？"><a href="#遇到了啥问题？" class="headerlink" title="遇到了啥问题？"></a>遇到了啥问题？</h3><p>这一年里，学习到了很多以前没接触过的新知识，学习的过程中也走了不少的弯路，期间遇到问题也都是从网上查阅资料，虽然经过了一段时间的摸索，问题也都得以解决，但自己并没有系统的整理过自己所遇到的问题。在此将我在 2019 遇到的一些问题记录下来。</p>
+<h4 id="vue-react-angular-多个前端项目如何部署在一台服务器。"><a href="#vue-react-angular-多个前端项目如何部署在一台服务器。" class="headerlink" title="vue, react, angular 多个前端项目如何部署在一台服务器。"></a>vue, react, angular 多个前端项目如何部署在一台服务器。</h4><ul>
 <li>最简单的方式就是根据 url 路径, 通过反向代理到不同的项目根目录。</li>
 <li>如果不用反向代理，可以通过 url + 目录名的形式来区分，但是这样做，每个项目需要单独配置<code>资源路径</code>以及<code>基本的路由</code>而且每个前端框架的配置不一样，比较的很麻烦，不建议这样做。</li>
 </ul>
-<h6 id="2-apache-反向代理-socket-io-websocket。"><a href="#2-apache-反向代理-socket-io-websocket。" class="headerlink" title="2. apache 反向代理 socket.io / websocket。"></a>2. apache 反向代理 socket.io / websocket。</h6><ul>
+<h4 id="apache-反向代理-socket-io-websocket。"><a href="#apache-反向代理-socket-io-websocket。" class="headerlink" title="apache 反向代理 socket.io / websocket。"></a>apache 反向代理 socket.io / websocket。</h4><ul>
 <li>由于 websocket 需要保持长连接, 需要借助 rewrite 模块来支持 websocket 的长连接。</li>
 </ul>
 <pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token comment"># 开启重写</span>
@@ -705,74 +665,45 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <span class="token comment"># /api/xxx 的 url 转发到 ws://localhost:3001 这个地址</span>
 <span class="token directive-inline property">RewriteRule</span> /api/(.*)   ws://localhost:3001/<span class="token variable">$1</span>	<span class="token directive-flags keyword">[P,L]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="3-linux-在关掉窗口-断开连接的情况下保持任务继续在后台执行。"><a href="#3-linux-在关掉窗口-断开连接的情况下保持任务继续在后台执行。" class="headerlink" title="3. linux 在关掉窗口/断开连接的情况下保持任务继续在后台执行。"></a>3. linux 在关掉窗口/断开连接的情况下保持任务继续在后台执行。</h6><ul>
+<h4 id="linux-在关掉窗口-断开连接的情况下保持任务继续在后台执行。"><a href="#linux-在关掉窗口-断开连接的情况下保持任务继续在后台执行。" class="headerlink" title="linux 在关掉窗口/断开连接的情况下保持任务继续在后台执行。"></a>linux 在关掉窗口/断开连接的情况下保持任务继续在后台执行。</h4><ul>
 <li>有时候需要在终端断开的情况下，继续让任务在后台正常运行, 并且下一次连上终端能够看到之前打印的内容。</li>
 <li>用 <code>screen</code> 来管理。</li>
 </ul>
-<h6 id="4-react-router-v4-如何将路由集中管理。"><a href="#4-react-router-v4-如何将路由集中管理。" class="headerlink" title="4. react-router v4 如何将路由集中管理。"></a>4. react-router v4 如何将路由集中管理。</h6><ul>
+<h4 id="react-router-v4-如何将路由集中管理。"><a href="#react-router-v4-如何将路由集中管理。" class="headerlink" title="react-router v4 如何将路由集中管理。"></a>react-router v4 如何将路由集中管理。</h4><ul>
 <li>react-router v4 路由配置起来比较松散, 这样的话，根据路由来定位到具体是哪个组件就要绕好几层，比较麻烦。</li>
 <li>后来才发现 <a href="https://github.com/ReactTraining/react-router" title="router-router-config">router-router-config</a> 可以集中管理项目中的路由, 真是相见恨晚。</li>
 </ul>
-<h5 id="完。"><a href="#完。" class="headerlink" title="完。"></a>完。</h5><p><a href="https://github.com/midoushitongtong"><img src="/images/post/1.png"></a></p>
+<h3 id="完。"><a href="#完。" class="headerlink" title="完。"></a>完。</h3><p><a href="https://github.com/midoushitongtong"><img src="/images/post/1.png"></a></p>
 ]]></content>
       <categories>
         <category>生活札记</category>
       </categories>
   </entry>
   <entry>
-    <title>react 服务端渲染之 next.js</title>
-    <url>/2019/01/15/node-version-manage/</url>
-    <content><![CDATA[<h5 id="为什么使用-Next-js-来做-React-服务端渲染"><a href="#为什么使用-Next-js-来做-React-服务端渲染" class="headerlink" title="为什么使用 Next.js 来做 React 服务端渲染 ?"></a>为什么使用 Next.js 来做 React 服务端渲染 ?</h5><ul>
-<li>轻量级，简单易懂，仅需学习几个核心的 API 就可上手开发</li>
-<li>易扩展, 与 <a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-express" title="express">express</a>, <a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-koa" title="koa">koa</a> 等 node 框架无缝接入</li>
-<li><a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/ssr-caching" title="缓存 ssr 页面">支持缓存</a></li>
-<li>typescript 支持</li>
+    <title>node 版本管理工具</title>
+    <url>/2019/01/31/node-version-manage/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在搭建一个开源项目的时候，需要 <code>Node v8</code> 的环境才能运行，但本地的环境是 <code>Node v10</code> , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。</p>
+<ul>
+<li><a href="https://github.com/tj/n" title="n">n</a></li>
+<li><a href="https://github.com/creationix/nvm">nvm</a></li>
 </ul>
 <span id="more"></span>
 
-<h5 id="快速搭建-Next-js-环境"><a href="#快速搭建-Next-js-环境" class="headerlink" title="快速搭建 Next.js 环境"></a>快速搭建 Next.js 环境</h5><ol>
-<li>初始化 <code>pacakge.json</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="用-N-还是-NVM-？"><a href="#用-N-还是-NVM-？" class="headerlink" title="用 N 还是 NVM ？"></a>用 N 还是 NVM ？</h3><ul>
+<li><code>n</code> 的优势是方便快捷，因为本身只是一个 <code>npm package</code>，用 npm 安装一下就能使用，但很遗憾的是，只支持 linux，不支持 <code>windows</code> 。</li>
+<li><code>nvm</code> 的优势是跨平台，即支持 linux 也支持 <a href="https://github.com/coreybutler/nvm-windows" title="windows">windows</a>，但是安装要比 <code>n</code> 费劲一点点。</li>
+<li>综上所述，考虑到日后跨平台的原因，另一方面 github 上 nvm 比 n 的 <code>star</code> 要高不少，所以我选择了 nvm 。</li>
+</ul>
+<h3 id="Linux-使用-NVM-管理-Node-版本"><a href="#Linux-使用-NVM-管理-Node-版本" class="headerlink" title="Linux 使用 NVM 管理 Node 版本"></a>Linux 使用 NVM 管理 Node 版本</h3><h4 id="安装-nvm"><a href="#安装-nvm" class="headerlink" title="安装 nvm"></a>安装 nvm</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>安装相关依赖</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save next react react-dom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="重启-shell"><a href="#重启-shell" class="headerlink" title="重启 shell"></a>重启 shell</h4><p>这一步非常重要，不然无法加载 nvm 相关脚本</p>
+<h4 id="测试-nvm-的部分命令"><a href="#测试-nvm-的部分命令" class="headerlink" title="测试 nvm 的部分命令"></a>测试 nvm 的部分命令</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nvm ls-remote <span class="token comment">#获取可安装的 node 版本</span>
+nvm <span class="token function">install</span> <span class="token number">11.9</span>.0 <span class="token comment">#安装指定版本的 node</span>
+nvm <span class="token function">ls</span> <span class="token comment">#查看已安装的 node 版本</span>
+nvm use <span class="token number">11.9</span>.0 <span class="token comment">#切换 node 版本</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>添加 next.js 相关的脚本</li>
-</ol>
-<p><code>/package.json</code></p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
-  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token property">"dev"</span><span class="token operator">:</span> <span class="token string">"next"</span><span class="token punctuation">,</span>
-    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"next build"</span><span class="token punctuation">,</span>
-    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"next start"</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="4">
-<li>编写测试文件</li>
-</ol>
-<p><code>/pages/index.js</code></p>
-<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> Head <span class="token keyword">from</span> <span class="token string">'next/head'</span><span class="token punctuation">;</span>
-
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Head</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token plain-text">My page title</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Head</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token plain-text">Hello world!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token plain-text">
-  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="5">
-<li>运行项目, 浏览器访问 <code>http://localhost:3000</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>next.js 的详细用法请参照<a href="https://github.com/zeit/next.js/">官方文档</a></p>
+<p><img src="/images/post/7.png"></p>
+<p>nvm 的详细用法请参照<a href="https://github.com/creationix/nvm">官方文档</a></p>
 ]]></content>
       <categories>
         <category>开发杂记</category>
@@ -781,12 +712,12 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   <entry>
     <title>react navigation 手势操作 + 自定义转场动画</title>
     <url>/2019/12/11/react-navigation-gesture-transition/</url>
-    <content><![CDATA[<h5 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h5><p>snack 地址: <a href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
+    <content><![CDATA[<h3 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h3><p>snack 地址: <a href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
 <p>可以通过 <a href="https://expo.io/">expo</a>，在你的设备上直接运行它。</p>
 <p><img src="/images/post/4.gif"></p>
 <span id="more"></span>
 
-<h5 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h5><h6 id="1-配置转场动画的过渡时间"><a href="#1-配置转场动画的过渡时间" class="headerlink" title="1. 配置转场动画的过渡时间"></a>1. 配置转场动画的过渡时间</h6><p>通过配置 <code>transitionSpec</code> 属性，来配置每个页面转场动画的过渡时间，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><h4 id="配置转场动画的过渡时间"><a href="#配置转场动画的过渡时间" class="headerlink" title="配置转场动画的过渡时间"></a>配置转场动画的过渡时间</h4><p>通过配置 <code>transitionSpec</code> 属性，来配置每个页面转场动画的过渡时间，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
   transitionSpec<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// 进入页面的配置</span>
@@ -808,7 +739,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="2-配置转场动画的动画效果"><a href="#2-配置转场动画的动画效果" class="headerlink" title="2. 配置转场动画的动画效果"></a>2. 配置转场动画的动画效果</h6><p>通过配置 <code>transform</code> 属性，来配置每个页面转场动画的动画效果，动画效果有很多种，例如【<code>淡入淡出</code>、<code>X/Y轴水平平移</code>、<code>Z轴水平旋转</code>、<code>放大/缩小</code>，等】，这里主要以<code>X轴水平平移</code>作为参考，其他配置类似，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<h4 id="配置转场动画的动画效果"><a href="#配置转场动画的动画效果" class="headerlink" title="配置转场动画的动画效果"></a>配置转场动画的动画效果</h4><p>通过配置 <code>transform</code> 属性，来配置每个页面转场动画的动画效果，动画效果有很多种，例如【<code>淡入淡出</code>、<code>X/Y轴水平平移</code>、<code>Z轴水平旋转</code>、<code>放大/缩小</code>，等】，这里主要以<code>X轴水平平移</code>作为参考，其他配置类似，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
   transform<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">&#123;</span>
@@ -829,14 +760,14 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   <span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="3-配置手势操作"><a href="#3-配置手势操作" class="headerlink" title="3. 配置手势操作"></a>3. 配置手势操作</h6><p>在 react navigation 中，配置手势操作非常简单，只需配置两个属性<code>gestureEnabled</code>以及<code>gestureDirection</code>，前者用于开启或关闭手势操作，后者用于控制手势操作为左右滑动还是上下滑动，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
+<h4 id="配置手势操作"><a href="#配置手势操作" class="headerlink" title="配置手势操作"></a>配置手势操作</h4><p>在 react navigation 中，配置手势操作非常简单，只需配置两个属性<code>gestureEnabled</code>以及<code>gestureDirection</code>，前者用于开启或关闭手势操作，后者用于控制手势操作为左右滑动还是上下滑动，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
   gestureEnabled<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   gestureDirection<span class="token operator">:</span> <span class="token string">'horizontal'</span><span class="token punctuation">,</span>
   <span class="token comment">// gestureDirection: 'vertical'</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h6 id="4-整合"><a href="#4-整合" class="headerlink" title="4. 整合"></a>4. 整合</h6><p>将上面的配置整合在一起，也就是上面 gif 中第一个转场动画的配置<br>看起来像这个样子</p>
+<h4 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h4><p>将上面的配置整合在一起，也就是上面 gif 中第一个转场动画的配置<br>看起来像这个样子</p>
 <pre class="line-numbers language-tsx" data-language="tsx"><code class="language-tsx"><span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen
   name<span class="token operator">=</span><span class="token string">"A"</span>
   component<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token constant">A</span><span class="token punctuation">&#125;</span>
@@ -881,7 +812,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
 <span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p><a href="https://callstack.com/blog/custom-screen-transitions-in-react-navigation">https://callstack.com/blog/custom-screen-transitions-in-react-navigation</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://callstack.com/blog/custom-screen-transitions-in-react-navigation">https://callstack.com/blog/custom-screen-transitions-in-react-navigation</a></p>
 <p><a href="https://reactnavigation.org/">https://reactnavigation.org</a></p>
 ]]></content>
       <categories>
@@ -889,36 +820,44 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
       </categories>
   </entry>
   <entry>
-    <title>node 版本管理工具</title>
-    <url>/2019/01/31/react-ssr-with-nextjs/</url>
-    <content><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>最近在搭建一个开源项目的时候，需要 <code>Node v8</code> 的环境才能运行，但本地的环境是 <code>Node v10</code> , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。</p>
-<ul>
-<li><a href="https://github.com/tj/n" title="n">n</a></li>
-<li><a href="https://github.com/creationix/nvm">nvm</a></li>
+    <title>react 服务端渲染之 next.js</title>
+    <url>/2019/01/15/react-ssr-with-nextjs/</url>
+    <content><![CDATA[<h3 id="为什么使用-Next-js-来做-React-服务端渲染"><a href="#为什么使用-Next-js-来做-React-服务端渲染" class="headerlink" title="为什么使用 Next.js 来做 React 服务端渲染 ?"></a>为什么使用 Next.js 来做 React 服务端渲染 ?</h3><ul>
+<li>轻量级，简单易懂，仅需学习几个核心的 API 就可上手开发</li>
+<li>易扩展, 与 <a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-express" title="express">express</a>, <a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/custom-server-koa" title="koa">koa</a> 等 node 框架无缝接入</li>
+<li><a href="https://github.com/zeit/next.js/tree/7.0.0-canary.8/examples/ssr-caching" title="缓存 ssr 页面">支持缓存</a></li>
+<li>typescript 支持</li>
 </ul>
 <span id="more"></span>
 
-<h5 id="用-N-还是-NVM-？"><a href="#用-N-还是-NVM-？" class="headerlink" title="用 N 还是 NVM ？"></a>用 N 还是 NVM ？</h5><ul>
-<li><code>n</code> 的优势是方便快捷，因为本身只是一个 <code>npm package</code>，用 npm 安装一下就能使用，但很遗憾的是，只支持 linux，不支持 <code>windows</code> 。</li>
-<li><code>nvm</code> 的优势是跨平台，即支持 linux 也支持 <a href="https://github.com/coreybutler/nvm-windows" title="windows">windows</a>，但是安装要比 <code>n</code> 费劲一点点。</li>
-<li>综上所述，考虑到日后跨平台的原因，另一方面 github 上 nvm 比 n 的 <code>star</code> 要高不少，所以我选择了 nvm 。</li>
-</ul>
-<h5 id="Linux-使用-NVM-管理-Node-版本"><a href="#Linux-使用-NVM-管理-Node-版本" class="headerlink" title="Linux 使用 NVM 管理 Node 版本"></a>Linux 使用 NVM 管理 Node 版本</h5><ol>
-<li>安装 nvm 命令行</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="快速搭建-Next-js-环境"><a href="#快速搭建-Next-js-环境" class="headerlink" title="快速搭建 Next.js 环境"></a>快速搭建 Next.js 环境</h3><h4 id="初始化-pacakge-json"><a href="#初始化-pacakge-json" class="headerlink" title="初始化 pacakge.json"></a>初始化 <code>pacakge.json</code></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li><code>重启 shell</code>，这一步非常重要，不然无法加载 nvm 相关脚本</li>
-<li>nvm 的部分脚本</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nvm ls-remote <span class="token comment">#获取可安装的 node 版本</span>
-nvm <span class="token function">install</span> <span class="token number">11.9</span>.0 <span class="token comment">#安装指定版本的 node</span>
-nvm <span class="token function">ls</span> <span class="token comment">#查看已安装的 node 版本</span>
-nvm use <span class="token number">11.9</span>.0 <span class="token comment">#切换 node 版本</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save next react react-dom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://yyccyy.com/wp-content/uploads/2019/01/nvm-use.png"></p>
-<p>nvm 的详细用法请参照<a href="https://github.com/creationix/nvm">官方文档</a></p>
+<h4 id="添加-next-js-相关的脚本"><a href="#添加-next-js-相关的脚本" class="headerlink" title="添加 next.js 相关的脚本"></a>添加 next.js 相关的脚本</h4><p><code>/package.json</code></p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"dev"</span><span class="token operator">:</span> <span class="token string">"next"</span><span class="token punctuation">,</span>
+    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"next build"</span><span class="token punctuation">,</span>
+    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"next start"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="编写测试文件"><a href="#编写测试文件" class="headerlink" title="编写测试文件"></a>编写测试文件</h4><p><code>/pages/index.js</code></p>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> Head <span class="token keyword">from</span> <span class="token string">'next/head'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Head</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token plain-text">My page title</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Head</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token plain-text">Hello world!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="运行项目-浏览器访问-http-localhost-3000"><a href="#运行项目-浏览器访问-http-localhost-3000" class="headerlink" title="运行项目, 浏览器访问 http://localhost:3000"></a>运行项目, 浏览器访问 <code>http://localhost:3000</code></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>next.js 的详细用法请参照<a href="https://github.com/zeit/next.js/">官方文档</a></p>
 ]]></content>
       <categories>
         <category>开发杂记</category>
@@ -927,23 +866,19 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
   <entry>
     <title>使用 husky + lint-staged 防止💩的流入</title>
     <url>/2019/12/21/reject-shit-use-husky-lint-staged/</url>
-    <content><![CDATA[<h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><h6 id="husky"><a href="#husky" class="headerlink" title="husky"></a>husky</h6><p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
-<h6 id="lint-staged"><a href="#lint-staged" class="headerlink" title="lint-staged"></a>lint-staged</h6><p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p><code>husky</code></p>
+<p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
+<p><code>lint-staged</code></p>
+<p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
 <blockquote>
 <p>&#x1f6ab;&#x1f4a9; lint-staged<br>Run linters against staged git files and don’t let &#x1f4a9; slip into your code base!</p>
 </blockquote>
 <p>大概意思是，在你将提交暂存区的文件到仓库之前，可以通过 lint-staged 对暂存区的文件进行检查，检查通过才能提交到仓库，以防止&#x1f4a9;的流入。</p>
 <span id="more"></span>
 
-<h5 id="使用-husky-和-lint-staged"><a href="#使用-husky-和-lint-staged" class="headerlink" title="使用 husky 和 lint-staged"></a>使用 husky 和 lint-staged</h5><ol>
-<li>安装依赖库</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="使用-husky-和-lint-staged"><a href="#使用-husky-和-lint-staged" class="headerlink" title="使用 husky 和 lint-staged"></a>使用 husky 和 lint-staged</h3><h4 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>在 package.json 中配置 husky</li>
-</ol>
-<ul>
+<h4 id="在-package-json-中配置-husky"><a href="#在-package-json-中配置-husky" class="headerlink" title="在 package.json 中配置 husky"></a>在 package.json 中配置 husky</h4><ul>
 <li>我们知道 husky 会给 git 相关操作添加钩子</li>
 <li>所以我们需要做的就是，配置钩子触发以后要做的事情</li>
 <li>在这里我们配置，在 <code>git commit</code> 之前，先调用 lint-staged 对暂存区的文件进行检查</li>
@@ -956,10 +891,7 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>在 package.json 中配置 lint-staged</li>
-</ol>
-<ul>
+<h4 id="在-package-json-中配置-lint-staged"><a href="#在-package-json-中配置-lint-staged" class="headerlink" title="在 package.json 中配置 lint-staged"></a>在 package.json 中配置 lint-staged</h4><ul>
 <li>这一步我们将配置 lint-staged 的检查规则，lint-staged 会将与规则相匹配的<code>暂存区的文件</code>进行检查</li>
 <li>第一个配置会把 src 目录下所有 .ts .tsx 文件进行 <code>eslint</code> 修复，<code>prettier</code> 格式化，之后将此文件再次提交到暂存区中(因为在进行检查之前 line-staged 会进行 <code>git stash</code> 相关操作，因此需要将文件重新提交到暂存区中)</li>
 <li>第二个配置会把 src 目录下所有 .scss 文件进行 <code>stylelint</code> 修复，<code>prettier</code> 格式化，之后将此文件再次提交到暂存区中(因为在进行检查之前 line-staged 会进行 <code>git stash</code> 相关操作，因此需要将文件重新提交到暂存区中)</li>
@@ -971,10 +903,17 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="husky-和-lint-staged-的大致工作流程"><a href="#husky-和-lint-staged-的大致工作流程" class="headerlink" title="husky 和 lint-staged 的大致工作流程"></a>husky 和 lint-staged 的大致工作流程</h5><p>1.<code>git add .</code> 将所有改动的文件提交到暂存区</p>
-<p>2.<code>git commit -m &quot;chore: xxx&quot;</code> 此操作会被 husky 所拦截, 之后调用 lint-staged 对文件进行检查</p>
-<p>3.lint-staged 会先进行 <code>git stash</code> 相关操作, 之后会将与规则相匹配的<code>暂存区的文件</code>进行检查，<code>只有已经被提交到暂存区的文件才会被检查，不管规则怎么写</code></p>
-<p>4.等带 lint-staged 执行完成后，只要有一个文件没有通过检查，husky 将会阻止本次的 <code>git commt</code>，之后需要修改对应的文件，重新进行 <code>git add</code> 与 <code>git commit</code> 操作</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>运行 <code>git commit -m &quot;chore: xxx&quot;</code> 查看是否生效, 测试前可以故意把代码写错, 比如随便打印一个不存在的变量 <code>console.log(abc)</code></p>
+<h3 id="husky-和-lint-staged-的大致工作流程"><a href="#husky-和-lint-staged-的大致工作流程" class="headerlink" title="husky 和 lint-staged 的大致工作流程"></a>husky 和 lint-staged 的大致工作流程</h3><ol>
+<li><p><code>git add .</code> 将所有改动的文件提交到暂存区</p>
+</li>
+<li><p><code>git commit -m &quot;chore: xxx&quot;</code> 此操作会被 husky 所拦截, 之后调用 lint-staged 对文件进行检查</p>
+</li>
+<li><p>lint-staged 会先进行 <code>git stash</code> 相关操作, 之后会将与规则相匹配的<code>暂存区的文件</code>进行检查，<code>只有已经被提交到暂存区的文件才会被检查，不管规则怎么写</code></p>
+</li>
+<li><p>等带 lint-staged 执行完成后，只要有一个文件没有通过检查，husky 将会阻止本次的 <code>git commt</code>，之后需要修改对应的文件，重新进行 <code>git add</code> 与 <code>git commit</code> 操作</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>开发杂记</category>
@@ -983,14 +922,9 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
   <entry>
     <title>typescript 热部署环境搭建</title>
     <url>/2018/12/25/typescript-hot-reload-env/</url>
-    <content><![CDATA[<h5 id="typescript-热部署环境搭建大致流程"><a href="#typescript-热部署环境搭建大致流程" class="headerlink" title="typescript 热部署环境搭建大致流程"></a>typescript 热部署环境搭建大致流程</h5><ol>
-<li>初始化 <code>pacakge.json</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <content><![CDATA[<h3 id="typescript-热部署环境搭建大致流程"><a href="#typescript-热部署环境搭建大致流程" class="headerlink" title="typescript 热部署环境搭建大致流程"></a>typescript 热部署环境搭建大致流程</h3><h4 id="初始化-pacakge-json"><a href="#初始化-pacakge-json" class="headerlink" title="初始化 pacakge.json"></a>初始化 <code>pacakge.json</code></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li><p>安装依赖, 用到以下依赖</p>
-<ul>
+<h4 id="安装依赖-用到以下依赖"><a href="#安装依赖-用到以下依赖" class="headerlink" title="安装依赖, 用到以下依赖"></a>安装依赖, 用到以下依赖</h4><ul>
 <li><code>webpack</code> <code>webpack-cli</code> webpack 以及 webpack 命令行工具</li>
 <li><code>typescript</code> typescript 命令行工具</li>
 <li><code>webpack-dev-server</code> webpack 热部署服务器</li>
@@ -998,16 +932,11 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
 <li><code>html-webpack-plugin</code> 用于打包 html</li>
 <li><code>clean-webpack-plugin</code> 用于删除上一次打包的文件</li>
 </ul>
-</li>
-</ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack webpack-cli typescript ts-loader webpack-dev-server html-webpack-plugin clean-webpack-plugin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <span id="more"></span>
 
-<ol start="3">
-<li>添加 webpack 脚本</li>
-</ol>
-<p><code>/package.json </code></p>
+<h4 id="添加-webpack-脚本"><a href="#添加-webpack-脚本" class="headerlink" title="添加 webpack 脚本"></a>添加 webpack 脚本</h4><p><code>/package.json </code></p>
 <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
   <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
     <span class="token property">"webpack-dev"</span><span class="token operator">:</span> <span class="token string">"webpack --mode development"</span><span class="token punctuation">,</span>
@@ -1016,10 +945,7 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="4">
-<li>配置 webpack</li>
-</ol>
-<p><code>/webpack.config.js</code></p>
+<h4 id="配置-webpack"><a href="#配置-webpack" class="headerlink" title="配置 webpack"></a>配置 webpack</h4><p><code>/webpack.config.js</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> CleanWebpackPlugin <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'clean-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1056,10 +982,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="5">
-<li>配置 typescript</li>
-</ol>
-<p><code>/tsconfig.json</code></p>
+<h4 id="配置-typescript"><a href="#配置-typescript" class="headerlink" title="配置 typescript"></a>配置 typescript</h4><p><code>/tsconfig.json</code></p>
 <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
   <span class="token property">"compilerOptions"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
     <span class="token property">"outDir"</span><span class="token operator">:</span> <span class="token string">"./dist/"</span><span class="token punctuation">,</span>
@@ -1071,10 +994,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="6">
-<li>编写测试文件</li>
-</ol>
-<p><code>/src/index.html</code></p>
+<h4 id="编写测试文件"><a href="#编写测试文件" class="headerlink" title="编写测试文件"></a>编写测试文件</h4><p><code>/src/index.html</code></p>
 <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
@@ -1099,10 +1019,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   age<span class="token operator">:</span> <span class="token number">123222333</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="7">
-<li>启动热部署服务器, 浏览器访问<code>127.0.0.1:8080</code>查看控制台打印</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="启动热部署服务器-浏览器访问127-0-0-1-8080查看控制台打印"><a href="#启动热部署服务器-浏览器访问127-0-0-1-8080查看控制台打印" class="headerlink" title="启动热部署服务器, 浏览器访问127.0.0.1:8080查看控制台打印"></a>启动热部署服务器, 浏览器访问<code>127.0.0.1:8080</code>查看控制台打印</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>开发杂记</category>

@@ -16,23 +16,23 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/nprogress.css">
+  <script src="/js/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"midoushitongtong.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="写在前面huskyhusky 是一个用于给 git 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加钩子，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。 lint-staged先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的  &amp;#x1f6ab;&amp;#x1f4a9; lint-stage">
+<meta name="description" content="写在前面husky husky 是一个用于给 git 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加钩子，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。 lint-staged 先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的  &amp;#x1f6ab;&amp;#x1f4a9; lint-sta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 husky + lint-staged 防止💩的流入">
 <meta property="og:url" content="https://midoushitongtong.github.io/2019/12/21/reject-shit-use-husky-lint-staged/index.html">
 <meta property="og:site_name" content="迷都是通通 &#39;s Blog">
-<meta property="og:description" content="写在前面huskyhusky 是一个用于给 git 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加钩子，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。 lint-staged先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的  &amp;#x1f6ab;&amp;#x1f4a9; lint-stage">
+<meta property="og:description" content="写在前面husky husky 是一个用于给 git 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加钩子，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。 lint-staged 先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的  &amp;#x1f6ab;&amp;#x1f4a9; lint-sta">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-21T13:05:05.000Z">
-<meta property="article:modified_time" content="2021-04-21T17:24:43.471Z">
+<meta property="article:modified_time" content="2021-04-23T11:55:51.612Z">
 <meta property="article:author" content="MiDouShiTongTong">
 <meta property="article:tag" content="迷都是通通 &#39;s Blog">
 <meta name="twitter:card" content="summary">
@@ -187,7 +187,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#husky"><span class="nav-number">1.1.</span> <span class="nav-text">husky</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lint-staged"><span class="nav-number">1.2.</span> <span class="nav-text">lint-staged</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-husky-%E5%92%8C-lint-staged"><span class="nav-number">2.</span> <span class="nav-text">使用 husky 和 lint-staged</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#husky-%E5%92%8C-lint-staged-%E7%9A%84%E5%A4%A7%E8%87%B4%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">husky 和 lint-staged 的大致工作流程</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-husky-%E5%92%8C-lint-staged"><span class="nav-number">2.</span> <span class="nav-text">使用 husky 和 lint-staged</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">安装依赖库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-package-json-%E4%B8%AD%E9%85%8D%E7%BD%AE-husky"><span class="nav-number">2.2.</span> <span class="nav-text">在 package.json 中配置 husky</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-package-json-%E4%B8%AD%E9%85%8D%E7%BD%AE-lint-staged"><span class="nav-number">2.3.</span> <span class="nav-text">在 package.json 中配置 lint-staged</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.4.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#husky-%E5%92%8C-lint-staged-%E7%9A%84%E5%A4%A7%E8%87%B4%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">husky 和 lint-staged 的大致工作流程</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -295,23 +295,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><h6 id="husky"><a href="#husky" class="headerlink" title="husky"></a>husky</h6><p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
-<h6 id="lint-staged"><a href="#lint-staged" class="headerlink" title="lint-staged"></a>lint-staged</h6><p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p><code>husky</code></p>
+<p>husky 是一个用于给 <code>git</code> 相关操作添加钩子的工具，通过 husky 我们可以非常简单的给 git 相关操作添加<a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">钩子</a>，最终我们会使用 husky 来给 git commit 操作挂上钩子, 来预防一些不良的 commit。</p>
+<p><code>lint-staged</code></p>
+<p>先看看看 lint-staged 的官方介绍，个人觉得还是挺有意思的</p>
 <blockquote>
 <p>&#x1f6ab;&#x1f4a9; lint-staged<br>Run linters against staged git files and don’t let &#x1f4a9; slip into your code base!</p>
 </blockquote>
 <p>大概意思是，在你将提交暂存区的文件到仓库之前，可以通过 lint-staged 对暂存区的文件进行检查，检查通过才能提交到仓库，以防止&#x1f4a9;的流入。</p>
 <span id="more"></span>
 
-<h5 id="使用-husky-和-lint-staged"><a href="#使用-husky-和-lint-staged" class="headerlink" title="使用 husky 和 lint-staged"></a>使用 husky 和 lint-staged</h5><ol>
-<li>安装依赖库</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="使用-husky-和-lint-staged"><a href="#使用-husky-和-lint-staged" class="headerlink" title="使用 husky 和 lint-staged"></a>使用 husky 和 lint-staged</h3><h4 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> --dev husky lint-staged<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li>在 package.json 中配置 husky</li>
-</ol>
-<ul>
+<h4 id="在-package-json-中配置-husky"><a href="#在-package-json-中配置-husky" class="headerlink" title="在 package.json 中配置 husky"></a>在 package.json 中配置 husky</h4><ul>
 <li>我们知道 husky 会给 git 相关操作添加钩子</li>
 <li>所以我们需要做的就是，配置钩子触发以后要做的事情</li>
 <li>在这里我们配置，在 <code>git commit</code> 之前，先调用 lint-staged 对暂存区的文件进行检查</li>
@@ -324,10 +320,7 @@
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<ol start="3">
-<li>在 package.json 中配置 lint-staged</li>
-</ol>
-<ul>
+<h4 id="在-package-json-中配置-lint-staged"><a href="#在-package-json-中配置-lint-staged" class="headerlink" title="在 package.json 中配置 lint-staged"></a>在 package.json 中配置 lint-staged</h4><ul>
 <li>这一步我们将配置 lint-staged 的检查规则，lint-staged 会将与规则相匹配的<code>暂存区的文件</code>进行检查</li>
 <li>第一个配置会把 src 目录下所有 .ts .tsx 文件进行 <code>eslint</code> 修复，<code>prettier</code> 格式化，之后将此文件再次提交到暂存区中(因为在进行检查之前 line-staged 会进行 <code>git stash</code> 相关操作，因此需要将文件重新提交到暂存区中)</li>
 <li>第二个配置会把 src 目录下所有 .scss 文件进行 <code>stylelint</code> 修复，<code>prettier</code> 格式化，之后将此文件再次提交到暂存区中(因为在进行检查之前 line-staged 会进行 <code>git stash</code> 相关操作，因此需要将文件重新提交到暂存区中)</li>
@@ -339,10 +332,17 @@
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="husky-和-lint-staged-的大致工作流程"><a href="#husky-和-lint-staged-的大致工作流程" class="headerlink" title="husky 和 lint-staged 的大致工作流程"></a>husky 和 lint-staged 的大致工作流程</h5><p>1.<code>git add .</code> 将所有改动的文件提交到暂存区</p>
-<p>2.<code>git commit -m &quot;chore: xxx&quot;</code> 此操作会被 husky 所拦截, 之后调用 lint-staged 对文件进行检查</p>
-<p>3.lint-staged 会先进行 <code>git stash</code> 相关操作, 之后会将与规则相匹配的<code>暂存区的文件</code>进行检查，<code>只有已经被提交到暂存区的文件才会被检查，不管规则怎么写</code></p>
-<p>4.等带 lint-staged 执行完成后，只要有一个文件没有通过检查，husky 将会阻止本次的 <code>git commt</code>，之后需要修改对应的文件，重新进行 <code>git add</code> 与 <code>git commit</code> 操作</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>运行 <code>git commit -m &quot;chore: xxx&quot;</code> 查看是否生效, 测试前可以故意把代码写错, 比如随便打印一个不存在的变量 <code>console.log(abc)</code></p>
+<h3 id="husky-和-lint-staged-的大致工作流程"><a href="#husky-和-lint-staged-的大致工作流程" class="headerlink" title="husky 和 lint-staged 的大致工作流程"></a>husky 和 lint-staged 的大致工作流程</h3><ol>
+<li><p><code>git add .</code> 将所有改动的文件提交到暂存区</p>
+</li>
+<li><p><code>git commit -m &quot;chore: xxx&quot;</code> 此操作会被 husky 所拦截, 之后调用 lint-staged 对文件进行检查</p>
+</li>
+<li><p>lint-staged 会先进行 <code>git stash</code> 相关操作, 之后会将与规则相匹配的<code>暂存区的文件</code>进行检查，<code>只有已经被提交到暂存区的文件才会被检查，不管规则怎么写</code></p>
+</li>
+<li><p>等带 lint-staged 执行完成后，只要有一个文件没有通过检查，husky 将会阻止本次的 <code>git commt</code>，之后需要修改对应的文件，重新进行 <code>git add</code> 与 <code>git commit</code> 操作</p>
+</li>
+</ol>
 
     </div>
 
@@ -419,8 +419,8 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/pjax.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [

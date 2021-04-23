@@ -16,9 +16,9 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/nprogress.css">
+  <script src="/js/nprogress.js"></script>
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
@@ -291,14 +291,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h5 id="typescript-热部署环境搭建大致流程"><a href="#typescript-热部署环境搭建大致流程" class="headerlink" title="typescript 热部署环境搭建大致流程"></a>typescript 热部署环境搭建大致流程</h5><ol>
-<li>初始化 <code>pacakge.json</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+          <h3 id="typescript-热部署环境搭建大致流程"><a href="#typescript-热部署环境搭建大致流程" class="headerlink" title="typescript 热部署环境搭建大致流程"></a>typescript 热部署环境搭建大致流程</h3><h4 id="初始化-pacakge-json"><a href="#初始化-pacakge-json" class="headerlink" title="初始化 pacakge.json"></a>初始化 <code>pacakge.json</code></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol start="2">
-<li><p>安装依赖, 用到以下依赖</p>
-<ul>
+<h4 id="安装依赖-用到以下依赖"><a href="#安装依赖-用到以下依赖" class="headerlink" title="安装依赖, 用到以下依赖"></a>安装依赖, 用到以下依赖</h4><ul>
 <li><code>webpack</code> <code>webpack-cli</code> webpack 以及 webpack 命令行工具</li>
 <li><code>typescript</code> typescript 命令行工具</li>
 <li><code>webpack-dev-server</code> webpack 热部署服务器</li>
@@ -306,8 +301,6 @@
 <li><code>html-webpack-plugin</code> 用于打包 html</li>
 <li><code>clean-webpack-plugin</code> 用于删除上一次打包的文件</li>
 </ul>
-</li>
-</ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack webpack-cli typescript ts-loader webpack-dev-server html-webpack-plugin clean-webpack-plugin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
@@ -382,8 +375,8 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="/js/anime.min.js"></script>
+  <script src="/js/pjax.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
