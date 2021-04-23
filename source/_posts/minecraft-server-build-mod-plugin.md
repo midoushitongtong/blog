@@ -7,12 +7,12 @@ categories:
 
 备注: 此搭建方法不限制与 `linux` 或 `windows`, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。
 
-### 步骤 1: 你需要准备什么？
+### 环境准备
 
 - 一台服务器(window, linux 均可)
 - java `8` 环境(别问为什么是 8, 问就是兼容性)
 
-### 步骤 2: 下载服务端
+### 下载服务端
 
 备注: minecraft 的服务端有很多种, 每种服务端都有各自的优缺点，有兴趣的同学可以自行摸索一下, 在这里的话, 因为我们的服务端需要支持安装 mod, 所以我选择使用 minecraft forge 来进行搭建。
 
@@ -30,7 +30,7 @@ wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.2
 
 如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行下载, 之后可通过 ftp 上传至服务器。
 
-### 步骤 3: 安装服务端
+### 安装服务端
 
 ```bash
 java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer
@@ -42,7 +42,7 @@ java -jar forge-1.12.2-14.23.5.2768-installer.jar --installServer
 
 ![](/images/post/5.png)
 
-### 步骤 4: 一切就绪, 启动服务端
+### 一切就绪, 启动服务端
 
 ```bash
 java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui
@@ -56,7 +56,9 @@ java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui
 
 再次启动服务端, 大功告成~
 
-### （可选）步骤 5: 安装 plugin
+### 其他
+
+#### 安装 plugin（可选）
 
 在 minecraft forge 的服务端中, 默认是不支持安装 plugin 的, 只支持安装 mod。
 
@@ -72,10 +74,10 @@ java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui
 
 备注: 在 minecraft forge 的服务端中, 不管是 mod 还是 plugin 都放在 `mods` 目录中, 而不像其他服务端可能存在有 `plugins` 的目录。
 
-### 其他
+#### 常用 plugin 推荐
 
-这里推荐两个 plugin, 用于管理服务器的权限
+这里推荐两个较为常用的 plugin, 用于管理服务器的权限
 
-- Nucles [https://ore.spongepowered.org/Nucleus/Nucleus](https://ore.spongepowered.org/Nucleus/Nucleus), 提供了各种各样的权限配置, 但配置起来不是很方便, 其官方也是推荐是使用别的 plugin 来简化权限的配置。
+- Nucles [https://ore.spongepowered.org/Nucleus/Nucleus](https://ore.spongepowered.org/Nucleus/Nucleus), 提供了各种各样的权限配置, 但配置起来不是很方便, 官方是推荐和其他插件一起配合使用, 比如下面这个。
 
-- LuckPerms [https://ore.spongepowered.org/Luck/LuckPerms](https://ore.spongepowered.org/Luck/LuckPerms), 专门用于高度定制化权限, 与 Nucles 使用效果可达最佳化。
+- LuckPerms [https://ore.spongepowered.org/Luck/LuckPerms](https://ore.spongepowered.org/Luck/LuckPerms), 专门用于高度定制化权限, 与上面提到的 Nucles 配合使用效果最佳。

@@ -252,11 +252,11 @@ npm run build-electron
 
 `以上就是 react + typescript + electron 大致配置流程, 更详细的配置请查阅官方文档`
 
-#### github
+### Github
 
 [react-electron-boilerplate](https://github.com/MiDouShiTongTong/react-electron-boilerplate)
 
-#### 参考资料
+### 参考资料
 
 [https://magicly.me/electron-starter](https://magicly.me/electron-starter)
 

@@ -844,11 +844,11 @@ vendors:
 
   # Anime.js
   # For more information: https://animejs.com
-  anime:
+  anime: /js/anime.min.js
 
   # Font Awesome
   # For more information: https://fontawesome.com
-  fontawesome:
+  fontawesome: /css/fontawesome.min.css
 
   # Prism
   prism:
@@ -864,7 +864,7 @@ vendors:
   copy_tex_css:
 
   # Pjax
-  pjax:
+  pjax: /js/pjax.min.js
 
   # FancyBox
   jquery:
@@ -910,8 +910,8 @@ vendors:
   animate_css:
 
   # NProgress.js
-  nprogress_js:
-  nprogress_css:
+  nprogress_js: /js/nprogress.js
+  nprogress_css: /css/nprogress.css
 
   # Canvas ribbon
   canvas_ribbon:

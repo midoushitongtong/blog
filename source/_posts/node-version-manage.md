@@ -14,13 +14,13 @@ categories:
 
 <!--more-->
 
-### 用 N 还是 NVM ？
+### 用 N 还是 nvm ？
 
 - `n` 的优势是方便快捷，因为本身只是一个 `npm package`，用 npm 安装一下就能使用，但很遗憾的是，只支持 linux，不支持 `windows` 。
 - `nvm` 的优势是跨平台，即支持 linux 也支持 [windows](https://github.com/coreybutler/nvm-windows 'windows')，但是安装要比 `n` 费劲一点点。
-- 综上所述，考虑到日后跨平台的原因，另一方面 github 上 nvm 比 n 的 `star` 要高不少，所以我选择了 nvm 。
+- 综上所述，考虑到日后跨平台的原因，另一方面 github 上 `nvm` 比 `n` 的 star 要高不少，所以我选择了 `nvm` 。
 
-### Linux 使用 NVM 管理 Node 版本
+### 在 Linux 中使用 nvm 管理 Node 版本
 
 #### 安装 nvm
 
@@ -32,7 +32,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | b
 
 这一步非常重要，不然无法加载 nvm 相关脚本
 
-#### 测试 nvm 的部分命令
+#### 使用 nvm
 
 ```bash
 nvm ls-remote #获取可安装的 node 版本
