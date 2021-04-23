@@ -5,14 +5,14 @@ categories:
   - 开发杂记
 ---
 
-##### wrk 有什么用？
+### wrk 有什么用？
 
 wrk 是一个的 http 压力测试工具。
 我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。
 
 <!--more-->
 
-##### 安装 wrk
+### 安装 wrk
 
 Ubuntu
 
@@ -45,7 +45,7 @@ Windows 10
 
 [文档](https://github.com/wg/wrk/wiki/Installing-wrk-on-Windows-10)
 
-##### 简单的使用 wrk
+### 简单的使用 wrk
 
 ```bash
 wrk -t10 -c100 -d5s --latency  "http://www.baidu.com"

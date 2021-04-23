@@ -5,9 +5,9 @@ categories:
   - 开发杂记
 ---
 
-##### 记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）
+### 记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）
 
-###### 1. 下载 windows 版 apache 启动器
+#### 下载 windows 版 apache 启动器
 
 - [下载 windows 版 apache 启动器传送门](https://www.apachehaus.com/cgi-bin/download.plx)
 - 选择`64`位或者`32`位的启动器下载即可
@@ -15,14 +15,14 @@ categories:
 
 <!--more-->
 
-###### 2. 下载 windows 版 php
+#### 下载 windows 版 php
 
 - [下载 windows 版 php 传送门](https://windows.php.net/download)
 - 由于我们使用 apache 作为服务器，这里需要选择线程安全的 php 进行下载
 - 选择`64`位或者`32`位的线程安全版本下载即可
 - ![](/images/post/3.png)
 
-###### 3. 配置 apache
+#### 配置 apache
 
 - 将下载的好的 apache 进行解压. 目录根据喜好放置，`目录最好不要带有中文`
 - 修改 `conf/httpd.conf` 配置文件
@@ -67,7 +67,7 @@ PHPIniDir "C:/Develop/Environment/PHP/Apache_PHP_One/PHP7"
 AddHandler application/x-httpd-php .php .html
 ```
 
-###### 4. 配置 php
+#### 配置 php
 
 - 将下载的好的 php 进行解压. 目录根据喜好放置，`目录最好不要带有中文`
 - 复制 `php.ini-development` 文件, 改为文件名称为 `php.ini`
@@ -88,15 +88,13 @@ extension=mysqli
 extension=pdo_mysql
 ```
 
-- 文件查找 upload_tmp_dir，修改临时上传目录
-- 注意目录需要自己手动创建
+- 文件查找 upload_tmp_dir，修改临时上传目录 `注意目录需要自己手动创建`
 
 ```bash
 upload_tmp_dir = "C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_upload_tmp"
 ```
 
-- 文件查找 session.save_path，修改 session 数据存放目录
-- 注意目录需要自己手动创建
+- 文件查找 session.save_path，修改 session 数据存放目录 `注意目录需要自己手动创建`
 
 ```bash
 session.save_path = "C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_session_tmp"
@@ -108,7 +106,7 @@ session.save_path = "C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php_session_
 date.timezone = Asia/Shanghai
 ```
 
-###### 5. 安装 apache 服务
+#### 安装 apache 服务
 
 - 打开命令行窗口进行操作
 
@@ -120,7 +118,7 @@ cd Apache24/bin
 httpd.exe -k install -n "apache"
 ```
 
-###### 6. 测试
+#### 测试
 
 - 启动 apache 服务器
 
@@ -130,7 +128,7 @@ net start apache
 
 - 浏览器访问http://127.0.0.0
 
-##### apache 多端口虚拟目录映射配置
+### apache 多端口虚拟目录映射配置
 
 - 修改 `conf/httpd.conf`，以下为参考配置
 

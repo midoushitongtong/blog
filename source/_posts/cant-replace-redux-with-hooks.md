@@ -5,13 +5,13 @@ categories:
   - 开发杂记
 ---
 
-##### 前言
+### 前言
 
 最近再补有关 [react hook](https://zh-hans.reactjs.org/docs/hooks-reference.html) 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 `state`，并且可以使用 `componentDidMount`, `componentDidUpdate`, `shouldComponentUpdate` 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 `useReducer` 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 `redux` 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 `完全取代` redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。
 
 <!--more-->
 
-##### 如何使用 hook 取代 redux
+### 如何使用 hook 取代 redux
 
 思路：
 
@@ -20,7 +20,7 @@ categories:
 
 具体步骤:
 
-1. 创建名叫 `toDoStore.ts` 的文件，从文件名大概可以知道，这个文件是用来管理 state 的。
+#### 创建名叫 `toDoStore.ts` 的文件，从文件名大概可以知道，这个文件是用来管理 state 的。
 
 ```tsx
 import React, { useReducer, useContext } from 'react';
@@ -108,7 +108,7 @@ const useToDoContext = (): {
 export { ToDoStoreContextProvider, useToDoContext, ToDoActionType };
 ```
 
-2. 创建一个或者多个组件，用于获取的 state，以及调用 dispatch 来改变的 state
+#### 创建一个或者多个组件，用于获取的 state，以及调用 dispatch 来改变的 state
 
 ```tsx
 import React from 'react';
@@ -160,7 +160,7 @@ const App: React.FunctionComponent = () => (
 export default App;
 ```
 
-3. 将最顶部组件用 ToDoStoreContextProvider 进行包裹，这样子组件才能进行订阅 context 的变化
+#### 将最顶部组件用 ToDoStoreContextProvider 进行包裹，这样子组件才能进行订阅 context 的变化
 
 ```tsx
 import React from 'react';
@@ -181,7 +181,7 @@ demo:
 <iframe height="450" width="740" src="https://codesandbox.io/embed/cant-replace-redux-with-hooks-fru24?fontsize=14&hidenavigation=1&theme=dark" frameborder="0" allowfullscreen>
 </iframe>
 
-##### 总结
+### 总结
 
 从上面使用 hook 取代 redux 的过程中，会发现有以下几点是 hook 无法满足的：
 

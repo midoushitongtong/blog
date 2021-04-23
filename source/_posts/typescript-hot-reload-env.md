@@ -5,22 +5,22 @@ categories:
   - 开发杂记
 ---
 
-##### typescript 热部署环境搭建大致流程
+### typescript 热部署环境搭建大致流程
 
-1. 初始化 `pacakge.json`
+#### 初始化 `pacakge.json`
 
 ```bash
 npm init -y
 ```
 
-2. 安装依赖, 用到以下依赖
+#### 安装依赖, 用到以下依赖
 
-   - `webpack` `webpack-cli` webpack 以及 webpack 命令行工具
-   - `typescript` typescript 命令行工具
-   - `webpack-dev-server` webpack 热部署服务器
-   - `ts-loader` 用于集成 webpack 和 typescript
-   - `html-webpack-plugin` 用于打包 html
-   - `clean-webpack-plugin` 用于删除上一次打包的文件
+- `webpack` `webpack-cli` webpack 以及 webpack 命令行工具
+- `typescript` typescript 命令行工具
+- `webpack-dev-server` webpack 热部署服务器
+- `ts-loader` 用于集成 webpack 和 typescript
+- `html-webpack-plugin` 用于打包 html
+- `clean-webpack-plugin` 用于删除上一次打包的文件
 
 ```bash
 npm install --save-dev webpack webpack-cli typescript ts-loader webpack-dev-server html-webpack-plugin clean-webpack-plugin
@@ -28,7 +28,7 @@ npm install --save-dev webpack webpack-cli typescript ts-loader webpack-dev-serv
 
 <!--more-->
 
-3. 添加 webpack 脚本
+#### 添加 webpack 脚本
 
 `/package.json `
 
@@ -42,7 +42,7 @@ npm install --save-dev webpack webpack-cli typescript ts-loader webpack-dev-serv
 }
 ```
 
-4. 配置 webpack
+#### 配置 webpack
 
 `/webpack.config.js`
 
@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-5. 配置 typescript
+#### 配置 typescript
 
 `/tsconfig.json`
 
@@ -101,7 +101,7 @@ module.exports = {
 }
 ```
 
-6. 编写测试文件
+#### 编写测试文件
 
 `/src/index.html`
 
@@ -134,7 +134,7 @@ show({
 });
 ```
 
-7. 启动热部署服务器, 浏览器访问`127.0.0.1:8080`查看控制台打印
+#### 启动热部署服务器, 浏览器访问`127.0.0.1:8080`查看控制台打印
 
 ```bash
 npm run start

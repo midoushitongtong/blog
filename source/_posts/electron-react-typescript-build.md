@@ -5,7 +5,7 @@ categories:
   - 开发杂记
 ---
 
-##### 前言
+### 前言
 
 最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。
 
@@ -24,21 +24,21 @@ categories:
 - 修改 electron 入口文件，使用 mainWindow.loadURL 方法加载 react 页面，分为`开发环境`和`生产环境`
 - 使用 electron-builder 打包项目
 
-##### 基本环境搭建
+### 基本环境搭建
 
-1. 创建 react + typescript 项目
+#### 创建 react + typescript 项目
 
 ```bash
 npx create-react-app my-app --typescript
 ```
 
-2. 安装 react-app-rewired 以及 cross-env
+#### 安装 react-app-rewired 以及 cross-env
 
 ```bash
 npm i -D react-app-rewired cross-env
 ```
 
-3. 创建 react-app-rewired 配置文件 `config-overrides.js` 用于扩展 webpack 配置
+#### 创建 react-app-rewired 配置文件 `config-overrides.js` 用于扩展 webpack 配置
 
 `/config-overrides.js`
 
@@ -54,13 +54,13 @@ module.exports = (config, env) => {
 };
 ```
 
-4. 安装 electron 环境
+#### 安装 electron 环境
 
 ```bash
 npm i -D electron
 ```
 
-5. 创建 electron 入口文件
+#### 创建 electron 入口文件
 
 `/main.js`
 
@@ -107,7 +107,7 @@ app.on('activate', function () {
 });
 ```
 
-6. 添加相关脚本
+#### 添加相关脚本
 
 `/package.json`
 
@@ -122,7 +122,7 @@ app.on('activate', function () {
   },
 ```
 
-7. 添加 electron 及 node.js 相关代码，用于测试是否集成完毕
+#### 添加 electron 及 node.js 相关代码，用于测试是否集成完毕
 
 `/src/App.tsx`
 
@@ -181,7 +181,7 @@ export default class App extends React.Component<Props, State> {
 }
 ```
 
-8. 运行测试
+#### 运行测试
 
 `一个命令行窗口跑 react 项目`
 
@@ -195,15 +195,15 @@ npm run start
 npm run start-electron
 ```
 
-##### 项目打包
+### 项目打包
 
-1. 添加 electron-builder 工具
+#### 添加 electron-builder 工具
 
 ```javascript
 npm i -D electron-builder
 ```
 
-2. 添加脚本以及打包相关配置
+#### 添加脚本以及打包相关配置
 
 `/package.json`
 
@@ -230,7 +230,7 @@ npm i -D electron-builder
   }
 ```
 
-3. 开始打包
+#### 开始打包
 
 `打包 react`
 
@@ -250,14 +250,13 @@ npm run start-electron-prod
 npm run build-electron
 ```
 
-`以上就是 react + typescript + electron 大致配置流程`
-`更详细的配置请查阅官方文档`
+`以上就是 react + typescript + electron 大致配置流程, 更详细的配置请查阅官方文档`
 
-##### github
+#### github
 
 [react-electron-boilerplate](https://github.com/MiDouShiTongTong/react-electron-boilerplate)
 
-##### 参考资料
+#### 参考资料
 
 [https://magicly.me/electron-starter](https://magicly.me/electron-starter)
 

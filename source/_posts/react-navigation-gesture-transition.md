@@ -5,7 +5,7 @@ categories:
   - 开发杂记
 ---
 
-##### 最终达到的一个效果
+### 最终达到的一个效果
 
 snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition](https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition)
 
@@ -15,9 +15,9 @@ snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-
 
 <!--more-->
 
-##### 实现步骤
+### 实现步骤
 
-###### 1. 配置转场动画的过渡时间
+#### 配置转场动画的过渡时间
 
 通过配置 `transitionSpec` 属性，来配置每个页面转场动画的过渡时间，此属性可以针对`特定的页面`进行单独的配置。
 
@@ -44,7 +44,7 @@ snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-
 }
 ```
 
-###### 2. 配置转场动画的动画效果
+#### 配置转场动画的动画效果
 
 通过配置 `transform` 属性，来配置每个页面转场动画的动画效果，动画效果有很多种，例如【`淡入淡出`、`X/Y轴水平平移`、`Z轴水平旋转`、`放大/缩小`，等】，这里主要以`X轴水平平移`作为参考，其他配置类似，此属性可以针对`特定的页面`进行单独的配置。
 
@@ -70,7 +70,7 @@ snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-
 }
 ```
 
-###### 3. 配置手势操作
+#### 配置手势操作
 
 在 react navigation 中，配置手势操作非常简单，只需配置两个属性`gestureEnabled`以及`gestureDirection`，前者用于开启或关闭手势操作，后者用于控制手势操作为左右滑动还是上下滑动，此属性可以针对`特定的页面`进行单独的配置。
 
@@ -82,7 +82,7 @@ snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-
 }
 ```
 
-###### 4. 整合
+#### 整合
 
 将上面的配置整合在一起，也就是上面 gif 中第一个转场动画的配置
 看起来像这个样子
@@ -133,7 +133,7 @@ snack 地址: [https://snack.expo.io/@midoushitongtong/react-navigation-gesture-
 />
 ```
 
-##### 参考资料
+### 参考资料
 
 [https://callstack.com/blog/custom-screen-transitions-in-react-navigation](https://callstack.com/blog/custom-screen-transitions-in-react-navigation)
 
