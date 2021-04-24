@@ -437,7 +437,7 @@ Transfer/sec:     <span class="token number">13</span>.34MB <span class="token c
     <content><![CDATA[<h3 id="记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）"><a href="#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）" class="headerlink" title="记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）"></a>记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）</h3><h4 id="下载-windows-版-apache-启动器"><a href="#下载-windows-版-apache-启动器" class="headerlink" title="下载 windows 版 apache 启动器"></a>下载 windows 版 apache 启动器</h4><ul>
 <li><a href="https://www.apachehaus.com/cgi-bin/download.plx">下载 windows 版 apache 启动器传送门</a></li>
 <li>选择<code>64</code>位或者<code>32</code>位的启动器下载即可</li>
-<li><img src="/images/post/2.png"></li>
+<li><img data-src="/images/post/2.png"></li>
 </ul>
 <span id="more"></span>
 
@@ -445,45 +445,45 @@ Transfer/sec:     <span class="token number">13</span>.34MB <span class="token c
 <li><a href="https://windows.php.net/download">下载 windows 版 php 传送门</a></li>
 <li>由于我们使用 apache 作为服务器，这里需要选择线程安全的 php 进行下载</li>
 <li>选择<code>64</code>位或者<code>32</code>位的线程安全版本下载即可</li>
-<li><img src="/images/post/3.png"></li>
+<li><img data-src="/images/post/3.png"></li>
 </ul>
 <h4 id="配置-apache"><a href="#配置-apache" class="headerlink" title="配置 apache"></a>配置 apache</h4><ul>
 <li>将下载的好的 apache 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
 <li>修改 <code>conf/httpd.conf</code> 配置文件</li>
 <li>文件查找 <code>Define SRVROOT</code> ，修改为<code>apache目录地址</code></li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Define SRVROOT <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/Apache24"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token directive-inline property">Define</span> SRVROOT <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/Apache24"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>文件查找 <code>DocumentRoot</code>，修改为 <code>项目存放的目录地址</code> 也就是 www 目录</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">DocumentRoot <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/www"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token directive-inline property">DocumentRoot</span> <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/www"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>文件查找 <code>&lt;Directory /&gt;</code> ，修改目录权限，不然会 403</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>Directory /<span class="token operator">></span>
-    Options Indexes FollowSymLinks
-	AllowOverride All
-	Require all granted
-<span class="token operator">&lt;</span>/Directory<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token directive-block tag"><span class="token directive-block tag"><span class="token punctuation">&lt;</span>Directory</span><span class="token directive-block-parameter attr-value"> /</span><span class="token punctuation">></span></span>
+    <span class="token directive-inline property">Options</span> Indexes FollowSymLinks
+	<span class="token directive-inline property">AllowOverride</span> All
+	<span class="token directive-inline property">Require</span> all granted
+<span class="token directive-block tag"><span class="token directive-block tag"><span class="token punctuation">&lt;/</span>Directory</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>文件查找 DirectoryIndex，修改文件解析<code>优先级</code></li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">DirectoryIndex index.php index.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf"><span class="token directive-inline property">DirectoryIndex</span> index.php index.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>添加如下 3 条配置，添加位置随意</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>. 配置 php7apache2_4.dll 文件的绝对路径, 此文件在php根目录下
-LoadModule php7_module <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php7apache2_4.dll"</span>
+<pre class="line-numbers language-apacheconf" data-language="apacheconf"><code class="language-apacheconf">1. 配置 php7apache2_4.dll 文件的绝对路径, 此文件在php根目录下
+<span class="token directive-inline property">LoadModule</span> php7_module <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php7apache2_4.dll"</span>
 
-<span class="token number">2</span>. 配置php目录位置
+2. 配置php目录位置
 PHPIniDir <span class="token string">"C:/Develop/Environment/PHP/Apache_PHP_One/PHP7"</span>
 
-<span class="token number">3</span>. 配置文件解析，将.php .html后缀的文件交给php去处理
-AddHandler application/x-httpd-php .php .html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+3. 配置文件解析，将.php .html后缀的文件交给php去处理
+<span class="token directive-inline property">AddHandler</span> application/x-httpd-php .php .html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="配置-php"><a href="#配置-php" class="headerlink" title="配置 php"></a>配置 php</h4><ul>
 <li>将下载的好的 php 进行解压. 目录根据喜好放置，<code>目录最好不要带有中文</code></li>
@@ -590,7 +590,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <span id="more"></span>
 
 <p><a href="https://files.minecraftforge.net/">https://files.minecraftforge.net</a>。</p>
-<p><img src="/images/post/4.png"></p>
+<p><img data-src="/images/post/4.png"></p>
 <p><code>图中点进去获取真实的下载链接后, 使用 wget 进行下载</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -599,7 +599,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 
 <p>安装过程中需要下载各种资源包, 如果服务器的下载速度太慢或者下载失败, 可以通过自己的电脑进行安装下载, 之后可通过 ftp 上传至服务器。</p>
 <p><code>最终安装完成后, 得到的目录结构</code></p>
-<p><img src="/images/post/5.png"></p>
+<p><img data-src="/images/post/5.png"></p>
 <h3 id="一切就绪-启动服务端"><a href="#一切就绪-启动服务端" class="headerlink" title="一切就绪, 启动服务端"></a>一切就绪, 启动服务端</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -Xmx1333M -Xms1333M -jar forge-1.12.2-14.23.5.2768-universal.jar nogui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><code>第一次启动必然会失败</code>, 原因是我们没有同意相关的协议。</p>
@@ -609,7 +609,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="安装-plugin（可选）"><a href="#安装-plugin（可选）" class="headerlink" title="安装 plugin（可选）"></a>安装 plugin（可选）</h4><p>在 minecraft forge 的服务端中, 默认是不支持安装 plugin 的, 只支持安装 mod。</p>
 <p>但如果想在 minecraft forge 的服务端中安装 plugin, 也是非常非常简单的。</p>
 <p>1.我们需要下载 SpongeForge 来作为运行插件的前提, <a href="https://www.spongepowered.org/downloads">https://www.spongepowered.org/downloads</a></p>
-<p><img src="/images/post/6.png"></p>
+<p><img data-src="/images/post/6.png"></p>
 <p>2.将下好的 .jar 文件放入 mods 目录中, <code>客户端不需要放, 只需要放在服务端</code>。</p>
 <p>3.有了运行插件的前提, 现在可以下载你需要的插件, <a href="https://ore.spongepowered.org/">https://ore.spongepowered.org</a>, 将下载好的插件(.jar 文件), 同样的放入 mods 目录中, <code>与上面一样的是, 客户端不需要放, 只需要放在服务端</code>。</p>
 <p>备注: 在 minecraft forge 的服务端中, 不管是 mod 还是 plugin 都放在 <code>mods</code> 目录中, 而不像其他服务端可能存在有 <code>plugins</code> 的目录。</p>
@@ -673,7 +673,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
 <li>react-router v4 路由配置起来比较松散, 这样的话，根据路由来定位到具体是哪个组件就要绕好几层，比较麻烦。</li>
 <li>后来才发现 <a href="https://github.com/ReactTraining/react-router" title="router-router-config">router-router-config</a> 可以集中管理项目中的路由, 真是相见恨晚。</li>
 </ul>
-<h3 id="完。"><a href="#完。" class="headerlink" title="完。"></a>完。</h3><p><a href="https://github.com/midoushitongtong"><img src="/images/post/1.png"></a></p>
+<h3 id="完。"><a href="#完。" class="headerlink" title="完。"></a>完。</h3><p><a href="https://github.com/midoushitongtong"><img data-src="/images/post/1.png"></a></p>
 ]]></content>
       <categories>
         <category>生活札记</category>
@@ -702,7 +702,7 @@ nvm <span class="token function">install</span> <span class="token number">11.9<
 nvm <span class="token function">ls</span> <span class="token comment">#查看已安装的 node 版本</span>
 nvm use <span class="token number">11.9</span>.0 <span class="token comment">#切换 node 版本</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="/images/post/7.png"></p>
+<p><img data-src="/images/post/7.png"></p>
 <p>nvm 的详细用法请参照<a href="https://github.com/creationix/nvm">官方文档</a></p>
 ]]></content>
       <categories>
@@ -714,7 +714,7 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
     <url>/2019/12/11/react-navigation-gesture-transition/</url>
     <content><![CDATA[<h3 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h3><p>snack 地址: <a href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
 <p>可以通过 <a href="https://expo.io/">expo</a>，在你的设备上直接运行它。</p>
-<p><img src="/images/post/4.gif"></p>
+<p><img data-src="/images/post/4.gif"></p>
 <span id="more"></span>
 
 <h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><h4 id="配置转场动画的过渡时间"><a href="#配置转场动画的过渡时间" class="headerlink" title="配置转场动画的过渡时间"></a>配置转场动画的过渡时间</h4><p>通过配置 <code>transitionSpec</code> 属性，来配置每个页面转场动画的过渡时间，此属性可以针对<code>特定的页面</code>进行单独的配置。</p>
