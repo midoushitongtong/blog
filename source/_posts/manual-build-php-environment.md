@@ -28,19 +28,19 @@ categories:
 - 修改 `conf/httpd.conf` 配置文件
 - 文件查找 `Define SRVROOT` ，修改为`apache目录地址`
 
-```bash
+```apacheconf
 Define SRVROOT "C:/Develop/Environment/PHP/Apache_PHP_One/Apache24"
 ```
 
 - 文件查找 `DocumentRoot`，修改为 `项目存放的目录地址` 也就是 www 目录
 
-```bash
+```apacheconf
 DocumentRoot "C:/Develop/Environment/PHP/Apache_PHP_One/www"
 ```
 
 - 文件查找 `<Directory />` ，修改目录权限，不然会 403
 
-```bash
+```apacheconf
 <Directory />
     Options Indexes FollowSymLinks
 	AllowOverride All
@@ -50,13 +50,13 @@ DocumentRoot "C:/Develop/Environment/PHP/Apache_PHP_One/www"
 
 - 文件查找 DirectoryIndex，修改文件解析`优先级`
 
-```bash
+```apacheconf
 DirectoryIndex index.php index.html
 ```
 
 - 添加如下 3 条配置，添加位置随意
 
-```bash
+```apacheconf
 1. 配置 php7apache2_4.dll 文件的绝对路径, 此文件在php根目录下
 LoadModule php7_module "C:/Develop/Environment/PHP/Apache_PHP_One/PHP7/php7apache2_4.dll"
 
