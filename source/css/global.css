@@ -29,5 +29,5 @@
 }
 .cdn-provider a img {
   max-width: 59px;
-  transform: translateY(0);
+  transform: translateZ(0);
 }
