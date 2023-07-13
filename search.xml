@@ -580,7 +580,7 @@ httpd.exe -k <span class="token function">install</span> -n <span class="token s
   </entry>
   <entry>
     <title>minecraft 服务端搭建, 支持模组(mod) + 插件(plugin)</title>
-    <url>/2020/02/22/minecraft-server-build-mod-plugin/</url>
+    <url>/2020/02/23/minecraft-server-build-mod-plugin/</url>
     <content><![CDATA[<p>备注: 此搭建方法不限制与 <code>linux</code> 或 <code>windows</code>, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。</p>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
 <li>一台服务器(window, linux 均可)</li>

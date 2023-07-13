@@ -6,7 +6,7 @@
   <link href="https://midoushitongtong.github.io/atom.xml" rel="self"/>
   
   <link href="https://midoushitongtong.github.io/"/>
-  <updated>2023-07-13T04:42:51.613Z</updated>
+  <updated>2023-07-13T04:55:26.944Z</updated>
   <id>https://midoushitongtong.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>minecraft 服务端搭建, 支持模组(mod) + 插件(plugin)</title>
-    <link href="https://midoushitongtong.github.io/2020/02/22/minecraft-server-build-mod-plugin/"/>
-    <id>https://midoushitongtong.github.io/2020/02/22/minecraft-server-build-mod-plugin/</id>
+    <link href="https://midoushitongtong.github.io/2020/02/23/minecraft-server-build-mod-plugin/"/>
+    <id>https://midoushitongtong.github.io/2020/02/23/minecraft-server-build-mod-plugin/</id>
     <published>2020-02-22T18:23:23.000Z</published>
-    <updated>2023-07-13T04:42:51.613Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;p&gt;备注: 此搭建方法不限制与 &lt;code&gt;linux&lt;/code&gt; 或 &lt;code&gt;windows&lt;/code&gt;, 且两者的搭建流程完全一致, 这里我将使用 linux 进行搭建。&lt;/p&gt;
@@ -43,7 +43,7 @@
     <link href="https://midoushitongtong.github.io/2019/12/29/cant-replace-redux-with-hooks/"/>
     <id>https://midoushitongtong.github.io/2019/12/29/cant-replace-redux-with-hooks/</id>
     <published>2019-12-29T04:05:05.000Z</published>
-    <updated>2023-07-13T04:42:51.613Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近再补有关 &lt;a href=&quot;https://zh-hans.reactjs.org/docs/hooks-reference.html&quot;&gt;react hook&lt;/a&gt; 的文档，在看完基础 hook 的章节时 （useState, useEffect, useContext），可以大致明白 hook 的用途了，简单的来说，hook 可以让函数组件也能拥有自己的 &lt;code&gt;state&lt;/code&gt;，并且可以使用 &lt;code&gt;componentDidMount&lt;/code&gt;, &lt;code&gt;componentDidUpdate&lt;/code&gt;, &lt;code&gt;shouldComponentUpdate&lt;/code&gt; 等 class 组件里面才有的特性，后面看到额外 hook 的章节时，里面有一个名叫 &lt;code&gt;useReducer&lt;/code&gt; 的 api，这让我对 hook 的用途又打上了一个新的问好，看完了 useReducer 的相关介绍以及用法后，就在想，这个叫 useReducer 的 api 会不会是用来取代 &lt;code&gt;redux&lt;/code&gt; 的呢？于是乎就在网上查阅了一下相关资料，最后从网上得出的结论就是，hook 是可以用来取代 redux 的，但是不能用 hook 去 &lt;code&gt;完全取代&lt;/code&gt; redux， 因为他们两者的出发点不同，解决问题的场景也有所不同。为了验证 hook 到底能不能完全取代 redux，我也做了相关的尝试，最终得出结论，如果想使用 hook 来完全取代 redux，还是有一些特定的需求是无法满足的，在这里记录一下。&lt;/p&gt;</summary>
@@ -60,7 +60,7 @@
     <link href="https://midoushitongtong.github.io/2019/12/21/reject-shit-use-husky-lint-staged/"/>
     <id>https://midoushitongtong.github.io/2019/12/21/reject-shit-use-husky-lint-staged/</id>
     <published>2019-12-21T13:05:05.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;&lt;code&gt;husky&lt;/code&gt;&lt;/p&gt;
@@ -84,7 +84,7 @@
     <link href="https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/"/>
     <id>https://midoushitongtong.github.io/2019/12/11/react-navigation-gesture-transition/</id>
     <published>2019-12-11T11:06:05.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;最终达到的一个效果&quot;&gt;&lt;a href=&quot;#最终达到的一个效果&quot; class=&quot;headerlink&quot; title=&quot;最终达到的一个效果&quot;&gt;&lt;/a&gt;最终达到的一个效果&lt;/h3&gt;&lt;p&gt;snack 地址: &lt;a href=&quot;https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition&quot;&gt;https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition&lt;/a&gt;&lt;/p&gt;
@@ -103,7 +103,7 @@
     <link href="https://midoushitongtong.github.io/2019/11/13/electron-react-typescript-build/"/>
     <id>https://midoushitongtong.github.io/2019/11/13/electron-react-typescript-build/</id>
     <published>2019-11-13T13:23:23.000Z</published>
-    <updated>2023-07-13T04:42:51.613Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近在学习 electron，技术选型大致为 electron + typescript + react + redux + react-router，为了方便，想寻找现成的脚手架，但发现，现有的脚手架都不太满足我的需求。&lt;/p&gt;
@@ -126,7 +126,7 @@
     <link href="https://midoushitongtong.github.io/2019/08/11/manual-build-php-environment/"/>
     <id>https://midoushitongtong.github.io/2019/08/11/manual-build-php-environment/</id>
     <published>2019-08-11T08:35:35.000Z</published>
-    <updated>2023-07-13T04:42:51.613Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）&quot;&gt;&lt;a href=&quot;#记录一下手动搭建-apache-php-环境的大致流程（闲得慌系列）&quot; class=&quot;headerlink&quot; title=&quot;记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）&quot;&gt;&lt;/a&gt;记录一下手动搭建 apache + php 环境的大致流程（闲得慌系列）&lt;/h3&gt;&lt;h4 id=&quot;下载-windows-版-apache-启动器&quot;&gt;&lt;a href=&quot;#下载-windows-版-apache-启动器&quot; class=&quot;headerlink&quot; title=&quot;下载 windows 版 apache 启动器&quot;&gt;&lt;/a&gt;下载 windows 版 apache 启动器&lt;/h4&gt;&lt;ul&gt;
@@ -147,7 +147,7 @@
     <link href="https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/"/>
     <id>https://midoushitongtong.github.io/2019/04/15/http-benchmark-wrk/</id>
     <published>2019-04-15T11:05:05.000Z</published>
-    <updated>2023-07-13T04:42:51.613Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;wrk-有什么用？&quot;&gt;&lt;a href=&quot;#wrk-有什么用？&quot; class=&quot;headerlink&quot; title=&quot;wrk 有什么用？&quot;&gt;&lt;/a&gt;wrk 有什么用？&lt;/h3&gt;&lt;p&gt;wrk 是一个的 http 压力测试工具。&lt;br&gt;我们可以通过 wrk 来测试我们的服务器大概能承受多少的并发量。&lt;/p&gt;</summary>
@@ -164,7 +164,7 @@
     <link href="https://midoushitongtong.github.io/2019/01/31/node-version-manage/"/>
     <id>https://midoushitongtong.github.io/2019/01/31/node-version-manage/</id>
     <published>2019-01-31T12:05:05.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近在搭建一个开源项目的时候，需要 &lt;code&gt;Node v8&lt;/code&gt; 的环境才能运行，但本地的环境是 &lt;code&gt;Node v10&lt;/code&gt; , 于是乎在网上寻求解决方案，比较流行的解决方案有两种。&lt;/p&gt;
@@ -185,7 +185,7 @@
     <link href="https://midoushitongtong.github.io/2019/01/15/react-ssr-with-nextjs/"/>
     <id>https://midoushitongtong.github.io/2019/01/15/react-ssr-with-nextjs/</id>
     <published>2019-01-15T05:25:25.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;为什么使用-Next-js-来做-React-服务端渲染&quot;&gt;&lt;a href=&quot;#为什么使用-Next-js-来做-React-服务端渲染&quot; class=&quot;headerlink&quot; title=&quot;为什么使用 Next.js 来做 React 服务端渲染 ?&quot;&gt;&lt;/a&gt;为什么使用 Next.js 来做 React 服务端渲染 ?&lt;/h3&gt;&lt;ul&gt;
@@ -207,7 +207,7 @@
     <link href="https://midoushitongtong.github.io/2019/01/05/my-2018/"/>
     <id>https://midoushitongtong.github.io/2019/01/05/my-2018/</id>
     <published>2019-01-05T12:20:20.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;干了啥？&quot;&gt;&lt;a href=&quot;#干了啥？&quot; class=&quot;headerlink&quot; title=&quot;干了啥？&quot;&gt;&lt;/a&gt;干了啥？&lt;/h3&gt;&lt;ul&gt;
@@ -231,7 +231,7 @@
     <link href="https://midoushitongtong.github.io/2018/12/25/typescript-hot-reload-env/"/>
     <id>https://midoushitongtong.github.io/2018/12/25/typescript-hot-reload-env/</id>
     <published>2018-12-25T07:11:11.000Z</published>
-    <updated>2023-07-13T04:42:51.617Z</updated>
+    <updated>2023-07-13T04:55:26.944Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;typescript-热部署环境搭建大致流程&quot;&gt;&lt;a href=&quot;#typescript-热部署环境搭建大致流程&quot; class=&quot;headerlink&quot; title=&quot;typescript 热部署环境搭建大致流程&quot;&gt;&lt;/a&gt;typescript 热部署环境搭建大致流程&lt;/h3&gt;&lt;h4 id=&quot;初始化-pacakge-json&quot;&gt;&lt;a href=&quot;#初始化-pacakge-json&quot; class=&quot;headerlink&quot; title=&quot;初始化 pacakge.json&quot;&gt;&lt;/a&gt;初始化 &lt;code&gt;pacakge.json&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&quot;line-numbers language-bash&quot; data-language=&quot;bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init -y&lt;span aria-hidden=&quot;true&quot; class=&quot;line-numbers-rows&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
