@@ -710,6 +710,35 @@ nvm use <span class="token number">11.9</span>.0 <span class="token comment">#�
       </categories>
   </entry>
   <entry>
+    <title>使用 pnpm patch 给第三方库打补丁</title>
+    <url>/2025/02/18/pnpm-patch/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>最近遇到了一个问题，就是在使用第三方库的时候，有些配置项是在库的源代码中直接写死的，在使用的时候没办法进行配置，一般遇到这种问题解决不了的时候， 通常会寻找其它合适的第三方的库，但有时候结果不是很理想，只有当前这个库能满足现有的需求，就会比较头疼，比较合理的解决方式是在 github 上提 issue 然后等待处理，或者自己 forke 仓库修复之后提交 PR，但是有时候项目可能着急上线等不了那么久，那么有没有其它方式能解决这个问题呢？有的，那就是使用 pnpm patch 给第三方库打补丁。</p>
+<span id="more"></span>
+
+<h3 id="什么是-pnpm-patch"><a href="#什么是-pnpm-patch" class="headerlink" title="什么是 pnpm patch"></a>什么是 pnpm patch</h3><p>pnpm patch 是 pnpm 提供的一种给第三方库打补丁的功能，它允许我们直接修改第三库中的代码 (node_modules 中的代码)，然后将修改后的代码应用到项目中，这个功能刚好能满足我的需求，同时这个功能非常适合一些小修小补，或者紧急修复。</p>
+<h3 id="如何使用-pnpm-patch-给第三方库打补丁"><a href="#如何使用-pnpm-patch-给第三方库打补丁" class="headerlink" title="如何使用 pnpm patch 给第三方库打补丁"></a>如何使用 pnpm patch 给第三方库打补丁</h3><ol>
+<li><p>先执行 <code>pnpm patch &lt;package-name&gt;@&lt;version&gt;</code> 命令，创建临时文件夹</p>
+<p> 比如我要修改 <code>@shadergradient/react@2.0.19</code> 这个库那么就执行</p>
+ <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">pnpm</span> patch @shadergradient/react@2.0.19<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 执行之后会生成一个临时文件夹，我们可以在控制台中看到这个临时文件夹的路径。</p>
+<p> <img data-src="/images/post/pnpm-patch-1.png"></p>
+<p> 之后我们使用编辑器打开这个临时文件夹，找到我们想要修改的文件，进行修改即可。</p>
+</li>
+<li><p>使用 <code>pnpm commit &lt;path&gt;</code> 命令，保存我们刚刚修改的补丁文件</p>
+ <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">pnpm</span> patch-commit <span class="token string">"D:\project-ksh<span class="token entity" title="\t">\t</span>gr-web<span class="token entity" title="\n">\n</span>ode_modules\.pnpm_patches\@shadergradient<span class="token entity" title="\r">\r</span>eact@2.0.19"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p> 执行完成后，会发现在根目录中看到生成了一个 <code>patchs</code> 文件夹，里面的补丁文件中含了我们刚刚修改的记录，同时在 <code>package.json</code> 中也会生成一个补丁文件对应的配置项</p>
+<p> <img data-src="/images/post/pnpm-patch-2.png"></p>
+</li>
+<li><p>大功告成，在之后的每次的 pnpm install 中都会自动应用我们刚刚的补丁，这样就解决了我们之前的问题。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>开发杂记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>react navigation 手势操作 + 自定义转场动画</title>
     <url>/2019/12/11/react-navigation-gesture-transition/</url>
     <content><![CDATA[<h3 id="最终达到的一个效果"><a href="#最终达到的一个效果" class="headerlink" title="最终达到的一个效果"></a>最终达到的一个效果</h3><p>snack 地址: <a href="https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition">https://snack.expo.io/@midoushitongtong/react-navigation-gesture-transition</a></p>
